@@ -19,3 +19,4 @@ jobs:
             string: github.event.head_commit.message
             replace-with: ''
             run: echo $replaced
+
