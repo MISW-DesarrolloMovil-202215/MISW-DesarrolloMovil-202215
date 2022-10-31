@@ -3,6 +3,7 @@ name: Cerrar Historia de Usuario
 on:
   push:
       branches:
+        - main
         - 'feature**' 
         
 jobs:
