@@ -13,8 +13,8 @@ jobs:
       steps:
         - name: Get issue name
           env:
-            GITHUB_HEAD_COMMIT: ${{github.event.head_commit.message}} 
-          if: ${{ contains($GITHUB_HEAD_COMMIT, 'Terminada')  }} 
+            GITHUB_HEAD_COMMIT: github.event.head_commit.message
+          if: ${{ contains("$GITHUB_HEAD_COMMIT", 'Terminada')  }} 
           uses: frabert/replace-string-action@v2.0
           with:
             pattern: 'HU , (\Terminada+)'
