@@ -12,12 +12,10 @@ jobs:
       runs-on: ubuntu-18.04
       steps:
         - name: Get issue name
-          env:
-            GITHUB_HEAD_COMMIT: github.event.head_commit.message
-          if: ${{ contains($GITHUB_HEAD_COMMIT, 'Terminada')  }} 
+          if: ${{ contains(github.event.head_commit.message, 'Terminada')  }} 
           uses: frabert/replace-string-action@v2.0
           with:
             pattern: 'HU , (\Terminada+)'
-            string: "$GITHUB_HEAD_COMMIT"
+            string: github.event.head_commit.message
             replace-with: ''
             run: echo $replaced
