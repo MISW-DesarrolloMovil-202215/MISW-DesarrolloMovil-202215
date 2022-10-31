@@ -3,7 +3,9 @@ name: Cerrar Historia de Usuario
 on:
   push:
       branches:
-        - 'feature**'    
+        - main
+        - 'feature**' 
+        
 jobs:
     job1:
       name: check_issue_state
@@ -13,11 +15,11 @@ jobs:
           if: ${{ contains(github.event.head_commit.message, 'Terminada')  }} 
           uses: frabert/replace-string-action@v2.0
           with:
-            pattern: 'T0 , (\Terminada+)'
+            pattern: 'HU , (\Terminada+)'
             string: github.event.head_commit.message
             replace-with: ''
         - name: Print variable
-        - if: startsWith(github.event.issue.title, 'T0-') != 'true'
+        - if: startsWith(github.event.issue.title, 'HU-') != 'true'
           name: Close Issue
           uses: peter-evans/close-issue@v2
           with:
