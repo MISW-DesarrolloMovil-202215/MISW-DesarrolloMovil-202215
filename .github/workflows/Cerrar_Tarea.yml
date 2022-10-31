@@ -1,0 +1,22 @@
+name: Cerrar Historia de Usuario 
+
+on:
+  push:
+      branches:
+        - 'feature**' 
+        
+jobs:
+    job1:
+      name: check_issue_state
+      runs-on: ubuntu-18.04
+      steps:
+        - name: Get issue name
+          env:
+            GITHUB_HEAD_COMMIT: ${{github.event.head_commit.message}} 
+          if: ${{ contains("$GITHUB_HEAD_COMMIT", 'Terminada')  }} 
+          uses: frabert/replace-string-action@v2.0
+          with:
+            pattern: 'HU , (\Terminada+)'
+            string: "$GITHUB_HEAD_COMMIT"
+            replace-with: ''
+            run: echo $replaced
