@@ -19,4 +19,4 @@ jobs:
             string: github.event.head_commit.message
             replace-with: ''
         - name: Print variable
-          run: echo "$replaced"
+          run: echo "${{replaced}}"
