@@ -12,17 +12,10 @@ jobs:
       runs-on: ubuntu-18.04
       steps:
         - name: Get issue name
-          if: ${{ contains(github.event.head_commit.message, 'Terminada')  }} 
+          if: ${{ contains(github.event.head_commit.message, 'Close')  }} 
           uses: frabert/replace-string-action@v2.0
           with:
             pattern: 'HU , (\Terminada+)'
             string: github.event.head_commit.message
             replace-with: ''
-        - name: Print variable
-        - if: startsWith(github.event.issue.title, 'HU-') != 'true'
-          name: Close Issue
-          uses: peter-evans/close-issue@v2
-          with:
-            comment: |
-              Issue title must start with 'HU-'.
-              Auto-closing this issue.
+            run: echo $replaced
