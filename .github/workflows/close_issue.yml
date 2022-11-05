@@ -1,0 +1,21 @@
+
+name: Close Issue
+
+on:
+  push:
+      branches:
+        - 'feature**' 
+
+jobs:
+    job1:
+      name: check_close_issue_state
+      runs-on: ubuntu-18.04
+      steps:
+        - name: Get issue name
+          if: ${{ contains(github.event.head_commit.message, 'Close')  }} 
+          uses: frabert/replace-string-action@v2.0
+          with:
+            pattern: 'HU , (\Terminada+)'
+            string: github.event.head_commit.message
+            replace-with: ''
+            run: echo $replaced
