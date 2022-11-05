@@ -8,7 +8,7 @@ on:
         
 jobs:
     job1:
-      name: check_issue_state
+      name: check_close_issue_state
       runs-on: ubuntu-18.04
       steps:
         - name: Get issue name
