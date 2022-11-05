@@ -1,18 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:elevation="6dp"
+        android:src="@drawable/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/backgroundBlack"></ImageView>
+
+    <LinearLayout
+        android:id="@+id/splashtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:elevation="6dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenido"
+            android:textColor="#fff"
+            android:textSize="34sp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="      Vinilos"
+            android:textColor="#fff"
+            android:textSize="26sp"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hometext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="70dp"
+        android:elevation="6dp"
+        android:gravity="left"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vinilos"
+            android:textColor="#fff"
+            android:textSize="31sp"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Explorar el mundo a través de tus oidos."
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textStyle="italic"></TextView>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/backgroundBlack"
+        android:layout_width="620dp"
+        android:layout_height="710dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+<!--Menu-->
+    <LinearLayout
+        android:id="@+id/menu"
+        android:elevation="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        android:layout_marginTop="340dp">
+
+        <LinearLayout
+            android:layout_marginBottom="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/albumes"></ImageView>
+
+                <Button
+                    android:id="@+id/albumes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Albumes"
+                    android:textSize="23sp"
+                    android:textColor="#000000"></Button>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/albumes"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Artistas"
+                    android:textSize="23sp"
+                    android:textColor="#000000"></TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/albumes"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coleccionista"
+                    android:textSize="23sp"
+                    android:textColor="#000000"></TextView>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

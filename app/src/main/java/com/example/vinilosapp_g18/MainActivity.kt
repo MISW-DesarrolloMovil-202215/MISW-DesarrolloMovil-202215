@@ -2,10 +2,43 @@ package com.example.vinilosapp_g18
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.TextView
+import android.widget.Button
+import android.widget.ImageView
+import android.content.Intent;
+import android.view.View
+import android.widget.LinearLayout
 
 class MainActivity : AppCompatActivity() {
+    lateinit var bgapp: ImageView;
+    lateinit var logo: ImageView;
+    lateinit var splashtext: LinearLayout;
+    lateinit var homeText: LinearLayout;
+    lateinit var menu: LinearLayout;
+    lateinit var frombotton: Animation;
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        frombotton = AnimationUtils.loadAnimation(this,R.anim.frombotton)
+        bgapp=findViewById(R.id.backgroundBlack)
+        logo=findViewById(R.id.logo)
+        splashtext = findViewById(R.id.splashtext)
+        homeText = findViewById(R.id.hometext)
+        menu = findViewById(R.id.menu)
+        bgapp.animate().translationY(-1250f).setDuration(800).setStartDelay(300);
+        logo.animate().alpha(0f).setDuration(800).setStartDelay(600);
+        splashtext.animate().translationY(140f).alpha(0f).setDuration(800).setStartDelay(300)
+        homeText.startAnimation(frombotton)
+        menu.startAnimation(frombotton)
+
+        val albumesButton = findViewById<Button>(R.id.albumes)
+        albumesButton.setOnClickListener {
+            val intent = Intent(this, ListAlbumes::class.java)
+            startActivity(intent)
+        }
+
     }
 }
