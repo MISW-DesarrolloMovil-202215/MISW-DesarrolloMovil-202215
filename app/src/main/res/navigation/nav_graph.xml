@@ -10,6 +10,16 @@
         android:name="com.example.vinilosapp_g18.ui.AlbumFragment"
         android:label="album_fragment"
         tools:layout="@layout/album_fragment" >
+        <action
+            android:id="@+id/action_collectorFragment_to_albumFragment"
+            app:destination="@id/albumDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/albumDetailFragment"
+        android:name="com.example.vinilosapp_g18.ui.AlbumDetailFragment"
+        android:label="album_detail_fragment"
+        tools:layout="@layout/album_detail_fragment" >
 
     </fragment>
 

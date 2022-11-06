@@ -6,11 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/lvAlbumes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".ui.MainActivity"></ListView>
+
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -18,7 +14,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="5dp"
         app:defaultNavHost="true"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
         app:navGraph="@navigation/nav_graph"
