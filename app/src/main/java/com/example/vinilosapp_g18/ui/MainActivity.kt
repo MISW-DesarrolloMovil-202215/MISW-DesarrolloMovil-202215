@@ -1,15 +1,14 @@
-package com.example.vinilosapp_g18
+package com.example.vinilosapp_g18.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.TextView
 import android.widget.Button
 import android.widget.ImageView
 import android.content.Intent;
-import android.view.View
 import android.widget.LinearLayout
+import com.example.vinilosapp_g18.R
 
 class MainActivity : AppCompatActivity() {
     lateinit var bgapp: ImageView;
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        frombotton = AnimationUtils.loadAnimation(this,R.anim.frombotton)
+        frombotton = AnimationUtils.loadAnimation(this, R.anim.frombotton)
         bgapp=findViewById(R.id.backgroundBlack)
         logo=findViewById(R.id.logo)
         splashtext = findViewById(R.id.splashtext)
