@@ -9,6 +9,6 @@
         android:id="@+id/lvAlbumes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".MainActivity"></ListView>
+        tools:context=".ui.MainActivity"></ListView>
 
 </LinearLayout>
