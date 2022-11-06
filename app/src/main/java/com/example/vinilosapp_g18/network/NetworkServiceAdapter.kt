@@ -2,7 +2,6 @@ package com.example.vinilosapp_g18.network
 
 
 import android.content.Context
-import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -11,8 +10,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.vinilosapp_g18.models.Album
-
-
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -42,6 +39,19 @@ class NetworkServiceAdapter constructor(context: Context) {
 
 
                 }
+                onComplete(list)
+            },
+            Response.ErrorListener {
+                onError(it)
+            }))
+    }
+
+    fun getAlbum(albumId:Int, onComplete:(resp:List<Album>)->Unit, onError: (error:VolleyError)->Unit){
+        requestQueue.add(getRequest("albums/$albumId",
+            Response.Listener<String> { response ->
+                val resp = JSONObject(response)
+                val list = mutableListOf<Album>()
+                list.add(0, Album(albumId = resp.getInt("id"),name = resp.getString("name"), cover = resp.getString("cover"), recordLabel = resp.getString("recordLabel"), releaseDate = resp.getString("releaseDate"), genre = resp.getString("genre"), description = resp.getString("description")))
                 onComplete(list)
             },
             Response.ErrorListener {

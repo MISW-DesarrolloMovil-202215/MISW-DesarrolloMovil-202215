@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-//import androidx.navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilosapp_g18.R
 import com.example.vinilosapp_g18.databinding.AlbumItemBinding
 import com.example.vinilosapp_g18.models.Album
-//import com.example.vinilosapp_g18.ui.AlbumFragmentDirections
+import com.example.vinilosapp_g18.ui.AlbumFragmentDirections
 
 class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
 
@@ -31,12 +31,12 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         holder.viewDataBinding.also {
-            it.album = albums[position]
+            it.album= albums[position]
         }
         holder.viewDataBinding.root.setOnClickListener {
-            //val action = AlbumFragmentDirections.actionAlbumFragmentToCommentFragment(albums[position].albumId)
+            val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(albums[position].albumId)
             // Navigate using that action
-        //    holder.viewDataBinding.root.findNavController().navigate(action)
+            holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }
 
@@ -52,6 +52,5 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
             val LAYOUT = R.layout.album_item
         }
     }
-
 
 }
