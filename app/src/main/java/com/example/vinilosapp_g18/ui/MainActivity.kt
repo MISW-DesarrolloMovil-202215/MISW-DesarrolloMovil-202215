@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.content.Intent;
 import android.widget.LinearLayout
-import com.example.vinilosapp_g18.ListAlbumes
 import com.example.vinilosapp_g18.R
 
 class MainActivity : AppCompatActivity() {

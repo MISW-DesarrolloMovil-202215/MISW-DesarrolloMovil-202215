@@ -18,7 +18,7 @@ import org.json.JSONObject
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
-        const val BASE_URL= "https://back-vinyls-populated.herokuapp.com/"
+        const val BASE_URL= "https://back-backvynils-grupo18.herokuapp.com/"
         var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {
@@ -39,6 +39,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
                     list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")))
+
+
                 }
                 onComplete(list)
             },

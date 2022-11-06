@@ -37,6 +37,25 @@
                     android:layout_height="wrap_content"
                     android:text="@{album.description}" />
 
+                <TextView
+                    android:id="@+id/text_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{album.cover}" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@{album.cover}"
+
+                    />
+
+                <TextView
+                    android:id="@+id/text_releaseDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{album.releaseDate}" />
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

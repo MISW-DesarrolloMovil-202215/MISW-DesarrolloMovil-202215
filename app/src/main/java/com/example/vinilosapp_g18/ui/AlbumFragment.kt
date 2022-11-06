@@ -1,4 +1,4 @@
-package com.example.vinyls_jetpack_application.ui
+package com.example.vinilosapp_g18.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

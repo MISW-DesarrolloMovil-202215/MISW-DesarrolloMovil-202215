@@ -1,7 +1,10 @@
-package com.example.vinilosapp_g18
+package com.example.vinilosapp_g18.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.vinilosapp_g18.R
+
+
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
