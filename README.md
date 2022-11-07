@@ -55,4 +55,5 @@ Finalmente, podrá ejecutar todas las pruebas del mismo modo en que corre la apl
 Descomprimir e instalar.
 [VinilosApp.zip](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/files/9948271/VinilosApp.zip)
 
-
+## Releases
+[V1.0.0](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/releases/tag/v1.0.0)
