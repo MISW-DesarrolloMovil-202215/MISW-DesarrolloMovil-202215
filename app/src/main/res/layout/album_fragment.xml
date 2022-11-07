@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eeeeee"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.AlbumFragment">
 
@@ -33,21 +34,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:itemTextColor="@drawable/desgn_men"
-        app:itemIconTint="@drawable/desgn_men"
-        android:background="@drawable/desing_manu"
-        app:menu="@menu/menu_bas">
-
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/albumsRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/album_item"/>
+            tools:listitem="@layout/album_item"
+            android:layout_marginBottom="60dp"/>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:itemTextColor="@drawable/desgn_men"
+            app:itemIconTint="@drawable/desgn_men"
+            android:background="@drawable/desing_manu"
+            app:menu="@menu/menu_bas">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
     </RelativeLayout>
 
 

@@ -33,7 +33,7 @@ class ListarAlbumesTest_Esc3 {
     var mActivityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun listarAlbumesTest() {
+    fun listarAlbumesTest_Esc3() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         Assert.assertEquals("com.example.vinilosapp_g18", appContext.packageName)
 

@@ -107,15 +107,6 @@ class ListarAlbumesTest_Esc1 {
         )
         albumsButton.perform(click())
 
-//        val backgroundMenu = onView(
-//            allOf(
-//                withId(R.id.splashtext), withText("Vinilos"),
-//                withParent(IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java)),
-//                isDisplayed()
-//            )
-//        )
-
-        view.perform(click())
 
         Thread.sleep(3000)
         val recyclerView = onView(
