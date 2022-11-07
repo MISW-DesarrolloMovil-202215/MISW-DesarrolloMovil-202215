@@ -108,62 +108,23 @@ class HU02_DetalleAlbumesTest_Esc2 {
 
         recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
 
-        val textTitle = onView(
+        val cover = onView(
             allOf(
-                withId(R.id.textView6),
-                withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
+                withId(R.id.text_cover),
                 isDisplayed()
             )
         )
 
-        val textView2 = onView(
+        val tracks = onView(
             allOf(
-                withId(R.id.textView5),
-                withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
+                withId(R.id.text_tracks),
                 isDisplayed()
             )
         )
-
-        val textView3 = onView(
-            allOf(
-                withId(R.id.text_releaseDate),
-                withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
-                isDisplayed()
-            )
-        )
-
-        val textView4 = onView(
-            allOf(
-                withId(R.id.text_tracks), withText("Decisiones    5:05\nDesapariciones    6:29\n"),
-                withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
-                isDisplayed()
-            )
-        )
-
-        val textView5 = onView(
-            allOf(
-                withId(R.id.text_comments),
-                withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
-                isDisplayed()
-            )
-        )
-
-        val textView6 = onView(
-            allOf(
-                withId(R.id.text_comments),
-                withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
-                isDisplayed()
-            )
-        )
-        Thread.sleep(2000)
 
         for (i in 1..5){
-            textTitle.check(matches(isDisplayed()))
-            textView2.check(matches(isDisplayed()))
-            textView3.check(matches(isDisplayed()))
-            textView4.check(matches(isDisplayed()))
-            textView5.check(matches(isDisplayed()))
-            textView6.check(matches(isDisplayed()))
+            cover.check(matches(isDisplayed()))
+            tracks.check(matches(isDisplayed()))
             Espresso.pressBack()
             Thread.sleep(2000)
             recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
