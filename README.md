@@ -39,3 +39,9 @@ buildFeatures {
     viewBinding true
     dataBinding true
 }
+
+## APK
+Descomprimir e instalar.
+[VinilosApp.zip](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/files/9948271/VinilosApp.zip)
+
+
