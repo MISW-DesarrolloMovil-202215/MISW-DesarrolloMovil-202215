@@ -33,9 +33,13 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Album>()
+                var tracks: String
+                tracks = ""
+                var comments: String
+                comments = ""
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
-                    list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")))
+                    list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description"), tracks = tracks, comments = comments))
 
 
                 }
@@ -51,7 +55,25 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
                 val list = mutableListOf<Album>()
-                list.add(0, Album(albumId = resp.getInt("id"),name = resp.getString("name"), cover = resp.getString("cover"), recordLabel = resp.getString("recordLabel"), releaseDate = resp.getString("releaseDate"), genre = resp.getString("genre"), description = resp.getString("description")))
+                var tracks: String
+                tracks = ""
+                var comments: String
+                comments = ""
+                val arr: JSONArray = resp.getJSONArray("tracks")
+                val arrComments: JSONArray = resp.getJSONArray("comments")
+
+                for (i in 0 until arr.length()) {
+                    tracks += arr.getJSONObject(i).getString("name") + "    " + arr.getJSONObject(i).getString("duration") + "\n"
+
+                }
+                for (i in 0 until arrComments.length()) {
+                    comments += arrComments.getJSONObject(i).getString("description") + ".\n" + "Calificación: " + arrComments.getJSONObject(i).getString("rating") + "\n" + "\n"
+
+
+                }
+
+                list.add(0, Album(albumId = resp.getInt("id"),name = resp.getString("name"), cover = resp.getString("cover"), recordLabel = resp.getString("recordLabel"), releaseDate = resp.getString("releaseDate"), genre = resp.getString("genre"), description = resp.getString("description"), tracks = tracks, comments = comments))
+
                 onComplete(list)
             },
             Response.ErrorListener {

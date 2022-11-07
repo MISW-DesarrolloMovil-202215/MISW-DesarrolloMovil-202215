@@ -56,6 +56,18 @@
                     android:layout_height="wrap_content"
                     android:text="@{album.releaseDate}" />
 
+                <TextView
+                    android:id="@+id/text_tracks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{album.tracks}" />
+
+                <TextView
+                    android:id="@+id/text_comments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{album.comments}" />
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
