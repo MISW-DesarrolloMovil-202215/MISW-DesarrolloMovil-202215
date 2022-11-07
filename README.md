@@ -7,6 +7,9 @@ La aplicación utiliza conectividad a internet así que asegúrese de tener una 
 ## IDE de desarrollo
 Android Studio Dolphin | 2021.3.1
 
+## IDE de desarrollo
+Kotlin
+
 ## En el build.gradle (app)
 Para asegurar que la aplicación pueda ejecutarse de manera correcta, la versiones utilizadas en las dependencias fueron:
 
