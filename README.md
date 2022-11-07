@@ -7,7 +7,7 @@ La aplicación utiliza conectividad a internet así que asegúrese de tener una 
 ## IDE de desarrollo
 Android Studio Dolphin | 2021.3.1
 
-## IDE de desarrollo
+## Lenguaje de desarrollo
 Kotlin
 
 ## En el build.gradle (app)
