@@ -105,7 +105,7 @@
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:src="@drawable/logo"/>
+                    app:image="@{album.cover}"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
