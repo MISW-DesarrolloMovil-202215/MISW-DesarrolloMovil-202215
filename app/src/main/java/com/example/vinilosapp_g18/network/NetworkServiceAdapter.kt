@@ -66,6 +66,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     tracks += arr.getJSONObject(i).getString("name") + "    " + arr.getJSONObject(i).getString("duration") + "\n"
 
                 }
+                
                 for (i in 0 until arrComments.length()) {
                     comments += arrComments.getJSONObject(i).getString("description") + ".\n" + "Calificación: " + arrComments.getJSONObject(i).getString("rating") + "\n" + "\n"
 
