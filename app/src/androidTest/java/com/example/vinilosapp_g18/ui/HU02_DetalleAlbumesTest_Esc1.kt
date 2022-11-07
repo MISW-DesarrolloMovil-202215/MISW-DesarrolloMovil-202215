@@ -116,15 +116,6 @@ class HU02_DetalleAlbumesTest_Esc1 {
         )
         cover.check(matches(isDisplayed()))
 
-        val tracks = onView(
-            allOf(
-                withId(R.id.text_tracks),
-                isDisplayed()
-            )
-        )
-        tracks.check(matches(isDisplayed()))
-
-
         Thread.sleep(2000)
 
 

@@ -115,16 +115,9 @@ class HU02_DetalleAlbumesTest_Esc2 {
             )
         )
 
-        val tracks = onView(
-            allOf(
-                withId(R.id.text_tracks),
-                isDisplayed()
-            )
-        )
 
         for (i in 1..5){
             cover.check(matches(isDisplayed()))
-            tracks.check(matches(isDisplayed()))
             Espresso.pressBack()
             Thread.sleep(2000)
             recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
