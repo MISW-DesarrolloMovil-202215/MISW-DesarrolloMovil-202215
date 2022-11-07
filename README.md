@@ -15,7 +15,7 @@ Para asegurar que la aplicación pueda ejecutarse de manera correcta, la version
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -28,10 +28,14 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.5.0-rc01'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.0-rc01'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
 }
 
 Asegurarse que en Android/buildFeatures , este configurado a :
+
 buildFeatures {
+
     viewBinding true
     dataBinding true
 }
