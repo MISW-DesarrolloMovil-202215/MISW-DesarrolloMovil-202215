@@ -94,7 +94,7 @@ class ListarAlbumesTest_Esc2 {
 
         val albumsButton = onView(
             allOf(
-                withId(R.id.albumes), withText("Albumes"),
+                withId(R.id.albumes2), withText("Albumes"),
                 childAtPosition(
                     childAtPosition(
                         withClassName(`is`("android.widget.LinearLayout")),
@@ -112,7 +112,6 @@ class ListarAlbumesTest_Esc2 {
         val recyclerView = onView(
             allOf(
                 withId(R.id.albumsRv),
-                withParent(withParent(withId(R.id.nav_host_fragment))),
                 isDisplayed()
             )
         )

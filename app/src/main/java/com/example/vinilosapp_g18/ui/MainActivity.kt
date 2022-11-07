@@ -7,6 +7,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.content.Intent;
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import com.example.vinilosapp_g18.R
 
@@ -33,8 +34,13 @@ class MainActivity : AppCompatActivity() {
         homeText.startAnimation(frombotton)
         menu.startAnimation(frombotton)
 
-        val albumesButton = findViewById<Button>(R.id.albumes)
+        val albumesButton = findViewById<ImageButton>(R.id.albumes)
+        val albumesButton2 = findViewById<Button>(R.id.albumes2)
         albumesButton.setOnClickListener {
+            val intent = Intent(this, ListAlbumes::class.java)
+            startActivity(intent)
+        }
+        albumesButton2.setOnClickListener {
             val intent = Intent(this, ListAlbumes::class.java)
             startActivity(intent)
         }
