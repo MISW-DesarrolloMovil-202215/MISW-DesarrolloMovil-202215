@@ -114,10 +114,7 @@ class HU02_DetalleAlbumesTest_Esc3 {
                 isDisplayed()
             )
         )
-<<<<<<< HEAD
-=======
 
->>>>>>> develop
         Thread.sleep(2000)
 
         for (i in 1..5){
