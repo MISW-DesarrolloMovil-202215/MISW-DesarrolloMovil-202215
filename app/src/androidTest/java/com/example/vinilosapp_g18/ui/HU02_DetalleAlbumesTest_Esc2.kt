@@ -115,7 +115,10 @@ class HU02_DetalleAlbumesTest_Esc2 {
             )
         )
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
         for (i in 1..5){
             cover.check(matches(isDisplayed()))
             Espresso.pressBack()
