@@ -9,6 +9,9 @@ import android.widget.ImageView
 import android.content.Intent;
 import android.widget.ImageButton
 import android.widget.LinearLayout
+
+import androidx.navigation.Navigation
+
 import com.example.vinilosapp_g18.R
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +47,19 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ListAlbumes::class.java)
             startActivity(intent)
         }
+
+
+        val coleccionistaImageButton = findViewById<ImageButton>(R.id.imgButtoncoleccionista)
+        val coleccionistaButton = findViewById<Button>(R.id.btnColeccionistas)
+        coleccionistaImageButton.setOnClickListener {
+            val intent = Intent(this, ListColecionista::class.java)
+            startActivity(intent)
+        }
+        coleccionistaButton.setOnClickListener {
+            val intent = Intent(this, ListColecionista::class.java)
+            startActivity(intent)
+           // Navigation.findNavController()
+        }
         val artistButton = findViewById<ImageButton>(R.id.artistas)
         val artistButton2 = findViewById<Button>(R.id.artistas2)
         artistButton.setOnClickListener {
@@ -53,6 +69,8 @@ class MainActivity : AppCompatActivity() {
         artistButton2.setOnClickListener {
             val intent = Intent(this, ListArtist::class.java)
             startActivity(intent)
+
         }
+
     }
 }
