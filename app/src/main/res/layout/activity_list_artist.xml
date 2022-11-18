@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    tools:context=".ui.ListArtist">
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -14,7 +14,6 @@
         android:layout_marginTop="5dp"
         app:defaultNavHost="true"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
-        app:navGraph="@navigation/nav_graph_albumes"
+        app:navGraph="@navigation/nav_graph_artistas"
         tools:layout_editor_absoluteX="0dp" />
-
 </LinearLayout>

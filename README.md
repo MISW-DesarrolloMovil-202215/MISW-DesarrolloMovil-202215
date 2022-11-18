@@ -40,8 +40,20 @@ buildFeatures {
     dataBinding true
 }
 
+## Ejecución de pruebas E2E con Espresso 
+Para la ejecución de pruebas seleccione la opción de 'Edit configurations...'
+
+![image](https://user-images.githubusercontent.com/66291589/200235320-9635b0bd-9743-472d-b323-5881465575ac.png)
+
+Seguido, seleccione el modulo de la aplicación VinilosApp y de click en Ok.
+![image](https://user-images.githubusercontent.com/66291589/200235475-8ac1b0ab-8e4a-4864-9638-db34a2640051.png)
+
+Finalmente, podrá ejecutar todas las pruebas del mismo modo en que corre la aplicación, seleccionando el botón verde de ejecución 'Run'.
+
+
 ## APK
 Descomprimir e instalar.
 [VinilosApp.zip](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/files/9948271/VinilosApp.zip)
 
-
+## Releases
+[V1.0.0](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/releases/tag/v1.0.0)

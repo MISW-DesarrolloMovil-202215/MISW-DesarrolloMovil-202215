@@ -25,7 +25,8 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class ListarAlbumesTest_Esc1 {
+
+class HU01_ListarAlbumesTest_Esc1 {
 
     @Rule
     @JvmField
