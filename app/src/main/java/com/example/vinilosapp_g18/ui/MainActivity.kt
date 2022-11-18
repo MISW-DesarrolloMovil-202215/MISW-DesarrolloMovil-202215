@@ -44,6 +44,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ListAlbumes::class.java)
             startActivity(intent)
         }
+        val artistButton = findViewById<ImageButton>(R.id.artistas)
+        val artistButton2 = findViewById<Button>(R.id.artistas2)
+        artistButton.setOnClickListener {
+            val intent = Intent(this, ListArtist::class.java)
+            startActivity(intent)
+        }
+        artistButton2.setOnClickListener {
+            val intent = Intent(this, ListArtist::class.java)
+            startActivity(intent)
+        }
 
     }
 }
