@@ -90,7 +90,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 val list = mutableListOf<Artist>()
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
-                    list.add(i, Artist(artistId = item.getInt("id"),name = item.getString("name"), image = item.getString("image"), birthDate = item.getString("birthDate"), description = item.getString("description")))
+                    list.add(i, Artist(artistId = item.getInt("id"),name = item.getString("name"), image = item.getString("image"), birthDate = item.getString("birthDate").split("T").toTypedArray()[0], description = item.getString("description"), albumes = "", prizes = ""))
 
 
                 }
@@ -105,8 +105,25 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
                 val list = mutableListOf<Artist>()
+                var albumes: String
+                albumes= ""
+                var prizes: String
+                prizes= ""
 
-                list.add(0, Artist(artistId = resp.getInt("id"),name = resp.getString("name"), image = resp.getString("image"), birthDate = resp.getString("birthDate"), description = resp.getString("description")))
+                val arrAlbumes: JSONArray = resp.getJSONArray("albums")
+                val arrPrizes: JSONArray = resp.getJSONArray("performerPrizes")
+
+                for (i in 0 until arrAlbumes.length()) {
+                    albumes += arrAlbumes.getJSONObject(i).getString("name") + "\n"
+
+                }
+
+                /*for (i in 0 until arrPrizes.length()) {
+                    prizes += arrPrizes.getJSONObject(i).getString("name") + "\n"
+
+                }*/
+
+                list.add(0, Artist(artistId = resp.getInt("id"),name = resp.getString("name"), image = resp.getString("image"), birthDate = resp.getString("birthDate").split("T").toTypedArray()[0], description = resp.getString("description"), albumes = albumes, prizes = prizes))
 
                 onComplete(list)
             },
@@ -124,4 +141,5 @@ class NetworkServiceAdapter constructor(context: Context) {
     private fun putRequest(path: String, body: JSONObject,  responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener ):JsonObjectRequest{
         return  JsonObjectRequest(Request.Method.PUT, BASE_URL+path, body, responseListener, errorListener)
     }
+
 }

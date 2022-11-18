@@ -6,4 +6,6 @@ val name:String,
 val image:String,
 val birthDate:String,
 val description:String,
+val albumes:String,
+val prizes: String,
 )
