@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ListColecionista::class.java)
             startActivity(intent)
            // Navigation.findNavController()
-
+        }
         val artistButton = findViewById<ImageButton>(R.id.artistas)
         val artistButton2 = findViewById<Button>(R.id.artistas2)
         artistButton.setOnClickListener {
@@ -71,6 +71,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
-    }
+
     }
 }
