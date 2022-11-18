@@ -54,6 +54,5 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ListArtist::class.java)
             startActivity(intent)
         }
-
     }
 }
