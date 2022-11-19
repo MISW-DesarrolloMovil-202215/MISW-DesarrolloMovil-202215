@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/albumFragment">
+    app:startDestination="@id/albumFragment"
+    tools:keep="@navigation/nav_graph">
 
     <fragment
         android:id="@+id/albumFragment"
@@ -24,7 +25,6 @@
             android:name="albumId"
             app:argType="integer" />
     </fragment>
-
 
 
     <fragment

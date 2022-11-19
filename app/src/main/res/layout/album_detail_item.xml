@@ -48,7 +48,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/imageDetail">
+                    >
 
                     <TextView
                         android:id="@+id/text_genre"
@@ -64,7 +64,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/imageDetail">
+                    >
 
                     <TextView
                         android:id="@+id/textView6"
