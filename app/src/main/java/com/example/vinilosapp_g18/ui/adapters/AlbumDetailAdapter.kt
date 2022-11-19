@@ -13,7 +13,12 @@ class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVi
     var album :List<Album> = emptyList()
         set(value) {
             field = value
-            notifyDataSetChanged()
+            notifyItemChanged(0)
+            notifyItemInserted(0)
+            notifyItemRemoved(0)
+            notifyItemRangeChanged(0, -1)
+            notifyItemRangeInserted(0, -1)
+            notifyItemRangeRemoved(0, -1)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumDetailViewHolder {
