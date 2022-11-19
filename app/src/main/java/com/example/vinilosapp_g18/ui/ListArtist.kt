@@ -11,7 +11,6 @@ import com.example.vinilosapp_g18.R
 
 
 class ListArtist : AppCompatActivity() {
-    ButtonNav nav
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_artist)
@@ -21,6 +20,5 @@ class ListArtist : AppCompatActivity() {
 
         // arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, albumes)
         //lvAlbumes.adapter = arrayAdapter
-        nav = findViewById<navigation>(R.id.nav)
     }
 }
