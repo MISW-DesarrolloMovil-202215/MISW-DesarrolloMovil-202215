@@ -75,6 +75,7 @@ class HU01_ListarAlbumesTest_Esc1 {
         )
         textView2.check(matches(withText("Explorar el mundo a través de tus oidos.")))
 
+
         val linearLayout2 = onView(
             allOf(
                 withId(R.id.menu),
