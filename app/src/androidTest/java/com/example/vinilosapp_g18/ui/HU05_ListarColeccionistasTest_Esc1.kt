@@ -23,14 +23,14 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class HU03_ListarArtistasTest_Esc2 {
+class HU05_ListarColeccionistasTest_Esc1 {
 
     @Rule
     @JvmField
     var mActivityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun listarArtistasTest() {
+    fun ListarColeccionistasTest() {
         val textView = onView(
             allOf(
                 withText("Vinilos"),
@@ -43,11 +43,11 @@ class HU03_ListarArtistasTest_Esc2 {
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Vinilos")))
-        Thread.sleep(2000)
+        textView.check(matches(isDisplayed()))
+
         val textView2 = onView(
             allOf(
-                withText("Vinilos"),
+                withText("Explorar el mundo a través de tus oidos."),
                 withParent(
                     allOf(
                         withId(R.id.hometext),
@@ -58,7 +58,6 @@ class HU03_ListarArtistasTest_Esc2 {
             )
         )
         textView2.check(matches(isDisplayed()))
-
 
         val linearLayout = onView(
             allOf(
@@ -71,7 +70,7 @@ class HU03_ListarArtistasTest_Esc2 {
 
         val imageButton = onView(
             allOf(
-                withId(R.id.artistas),
+                withId(R.id.imgButtoncoleccionista),
                 withParent(withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java))),
                 isDisplayed()
             )
@@ -80,58 +79,49 @@ class HU03_ListarArtistasTest_Esc2 {
 
         val button = onView(
             allOf(
-                withId(R.id.artistas2), withText("ARTISTAS"),
+                withId(R.id.btnColeccionistas), withText("COLECCIONISTA"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java))),
                 isDisplayed()
             )
         )
         button.check(matches(isDisplayed()))
 
-        val viewGroup = onView(
+        val button2 = onView(
             allOf(
-                withParent(
-                    allOf(
-                        withId(android.R.id.content),
-                        withParent(withId(com.bumptech.glide.R.id.action_bar_root))
-                    )
-                ),
+                withId(R.id.btnColeccionistas), withText("COLECCIONISTA"),
+                withParent(withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java))),
                 isDisplayed()
             )
         )
-        viewGroup.check(matches(isDisplayed()))
+        button2.check(matches(isDisplayed()))
 
+        Thread.sleep(2500)
         val appCompatImageButton = onView(
             allOf(
-                withId(R.id.artistas),
+                withId(R.id.imgButtoncoleccionista),
                 childAtPosition(
                     childAtPosition(
                         withClassName(`is`("android.widget.LinearLayout")),
-                        1
+                        2
                     ),
                     0
                 ),
                 isDisplayed()
             )
         )
+
         appCompatImageButton.perform(click())
-        Thread.sleep(3000)
+        Thread.sleep(3500)
 
         val recyclerView = onView(
             allOf(
-                withId(R.id.artistRv),
+                withId(R.id.coleccionistaRv),
                 isDisplayed()
             )
         )
-
-        for (i in 1..5){
-            recyclerView.perform(swipeUp())
-            Thread.sleep(1000)
-        }
-
-        recyclerView.check(matches((isDisplayed())))
+        recyclerView.check(matches(isDisplayed()))
 
     }
-
 
     private fun childAtPosition(
         parentMatcher: Matcher<View>, position: Int
