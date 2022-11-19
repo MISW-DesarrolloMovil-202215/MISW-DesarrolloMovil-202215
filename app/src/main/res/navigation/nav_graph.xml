@@ -32,7 +32,6 @@
         android:name="com.example.vinilosapp_g18.ui.ColeccionistaFragment"
         android:label="album_detail_fragment"
         tools:layout="@layout/coleccionista_fragment" >
-
     </fragment>
 
 </navigation>
