@@ -1,7 +1,6 @@
 package com.example.vinilosapp_g18.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.vinilosapp_g18.models.Album
 import com.example.vinilosapp_g18.repositories.AlbumDetailRepository

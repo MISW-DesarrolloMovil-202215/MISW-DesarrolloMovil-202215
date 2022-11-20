@@ -1,4 +1,5 @@
 package com.example.vinilosapp_g18.ui.adapters
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes

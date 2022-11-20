@@ -1,10 +1,8 @@
 package com.example.vinilosapp_g18.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.vinilosapp_g18.models.Coleccionista
-import com.example.vinilosapp_g18.network.NetworkServiceAdapter
 import com.example.vinilosapp_g18.repositories.ColeccionistaRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

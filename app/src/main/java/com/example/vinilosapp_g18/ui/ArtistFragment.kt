@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vinilosapp_g18.R
 import com.example.vinilosapp_g18.databinding.ArtistFragmentBinding
 import com.example.vinilosapp_g18.models.Artist
 import com.example.vinilosapp_g18.ui.adapters.ArtistsAdapter

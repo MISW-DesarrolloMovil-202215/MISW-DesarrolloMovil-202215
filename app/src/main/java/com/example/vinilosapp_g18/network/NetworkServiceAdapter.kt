@@ -5,7 +5,6 @@ import android.content.Context
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
-import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -38,12 +37,11 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Album>()
-                var tracks: String
-                tracks = ""
-                var comments: String
-                comments = ""
+                var tracks: String= ""
+                var comments: String= ""
+                var item: JSONObject
                 for (i in 0 until resp.length()) {
-                    val item = resp.getJSONObject(i)
+                    item = resp.getJSONObject(i)
                     list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate").split("T").toTypedArray()[0], genre = item.getString("genre"), description = item.getString("description"), tracks = tracks, comments = comments))
                 }
                 cont.resume(list)
@@ -57,10 +55,8 @@ class NetworkServiceAdapter constructor(context: Context) {
         requestQueue.add(getRequest("albums/$albumId",
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
-                var tracks: String
-                tracks = ""
-                var comments: String
-                comments = ""
+                var tracks: String=""
+                var comments: String=""
                 val list = mutableListOf<Album>()
                 val arr: JSONArray = resp.getJSONArray("tracks")
                 val arrComments: JSONArray = resp.getJSONArray("comments")
@@ -92,12 +88,11 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Coleccionista>()
-                var tracks: String
-                tracks = ""
-                var comments: String
-                comments = ""
+                var tracks: String= ""
+                var comments: String= ""
+                var item: JSONObject
                 for (i in 0 until resp.length()) {
-                    val item = resp.getJSONObject(i)
+                    item = resp.getJSONObject(i)
                     list.add(i, Coleccionista(coleccionistaId = item.getInt("id"),name = item.getString("name"),telephone= item.getString("telephone"),email= item.getString("email")))
 
                 }
@@ -113,8 +108,9 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Artist>()
+                var item: JSONObject
                 for (i in 0 until resp.length()) {
-                    val item = resp.getJSONObject(i)
+                    item = resp.getJSONObject(i)
                     list.add(i, Artist(artistId = item.getInt("id"),name = item.getString("name"), image = item.getString("image"), birthDate = item.getString("birthDate").split("T").toTypedArray()[0], description = item.getString("description"), albumes = "", prizes = ""))
                 }
                 cont.resume(list)
@@ -128,11 +124,8 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
                 val list = mutableListOf<Artist>()
-                var albumes: String
-                albumes= ""
-                var prizes: String
-                prizes= ""
-
+                var albumes: String= ""
+                var prizes: String= ""
                 val arrAlbumes: JSONArray = resp.getJSONArray("albums")
                 val arrPrizes: JSONArray = resp.getJSONArray("performerPrizes")
 
