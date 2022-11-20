@@ -1,10 +1,14 @@
 package com.example.vinilosapp_g18.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.vinilosapp_g18.models.Coleccionista
 import com.example.vinilosapp_g18.network.NetworkServiceAdapter
 import com.example.vinilosapp_g18.repositories.ColeccionistaRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class ColeccionistaViewModel(application: Application) :  AndroidViewModel(application) {
@@ -31,13 +35,18 @@ class ColeccionistaViewModel(application: Application) :  AndroidViewModel(appli
     }
 
     private fun refreshDataFromNetwork() {
-        coleccionistaRepository.refreshData({
-            _coleccionistas.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
-            _eventNetworkError.value = true
-        })
+        try {
+            viewModelScope.launch(Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
+                    var data = coleccionistaRepository.refreshData()
+                    _coleccionistas.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }catch (e:Exception){
+                _eventNetworkError.value = true
+        }
     }
 
     fun onNetworkErrorShown() {

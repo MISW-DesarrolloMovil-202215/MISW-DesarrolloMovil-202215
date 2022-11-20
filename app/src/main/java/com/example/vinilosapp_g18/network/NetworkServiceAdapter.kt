@@ -10,13 +10,13 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.vinilosapp_g18.models.Album
-
 import com.example.vinilosapp_g18.models.Coleccionista
-
 import com.example.vinilosapp_g18.models.Artist
-
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
@@ -33,7 +33,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         // applicationContext keeps you from leaking the Activity or BroadcastReceiver if someone passes one in.
         Volley.newRequestQueue(context.applicationContext)
     }
-    fun getAlbums(onComplete:(resp:List<Album>)->Unit, onError: (error:VolleyError)->Unit){
+    suspend fun getAlbums() = suspendCoroutine<List<Album>>{ cont->
         requestQueue.add(getRequest("albums",
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
@@ -45,25 +45,23 @@ class NetworkServiceAdapter constructor(context: Context) {
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
                     list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate").split("T").toTypedArray()[0], genre = item.getString("genre"), description = item.getString("description"), tracks = tracks, comments = comments))
-
-
                 }
-                onComplete(list)
+                cont.resume(list)
             },
             Response.ErrorListener {
-                onError(it)
+                cont.resumeWithException(it)
             }))
     }
 
-    fun getAlbum(albumId:Int, onComplete:(resp:List<Album>)->Unit, onError: (error:VolleyError)->Unit){
+    suspend fun getAlbum(albumId:Int)=suspendCoroutine<List<Album>>{cont->
         requestQueue.add(getRequest("albums/$albumId",
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
-                val list = mutableListOf<Album>()
                 var tracks: String
                 tracks = ""
                 var comments: String
                 comments = ""
+                val list = mutableListOf<Album>()
                 val arr: JSONArray = resp.getJSONArray("tracks")
                 val arrComments: JSONArray = resp.getJSONArray("comments")
 
@@ -79,18 +77,17 @@ class NetworkServiceAdapter constructor(context: Context) {
                 }
 
                 list.add(0, Album(albumId = resp.getInt("id"),name = resp.getString("name"), cover = resp.getString("cover"), recordLabel = resp.getString("recordLabel"), releaseDate = resp.getString("releaseDate").split("T").toTypedArray()[0], genre = resp.getString("genre"), description = resp.getString("description"), tracks = tracks, comments = comments))
-
-                onComplete(list)
+                cont.resume(list)
             },
             Response.ErrorListener {
-                onError(it)
+                cont.resumeWithException(it)
             }))
     }
 
 
 
 
-    fun getColeccionistas(onComplete:(resp:List<Coleccionista>)->Unit, onError: (error:VolleyError)->Unit){
+    suspend fun getColeccionistas()=suspendCoroutine<List<Coleccionista>>{cont->
         requestQueue.add(getRequest("collectors",
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
@@ -104,14 +101,14 @@ class NetworkServiceAdapter constructor(context: Context) {
                     list.add(i, Coleccionista(coleccionistaId = item.getInt("id"),name = item.getString("name"),telephone= item.getString("telephone"),email= item.getString("email")))
 
                 }
-                onComplete(list)
+                cont.resume(list)
             },
             Response.ErrorListener {
-                onError(it)
+                cont.resumeWithException(it)
             }))
     }
 
-    fun getArtists(onComplete:(resp:List<Artist>)->Unit, onError: (error:VolleyError)->Unit){
+    suspend fun getArtists()=suspendCoroutine<List<Artist>>{cont->
         requestQueue.add(getRequest("Musicians",
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
@@ -120,13 +117,13 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val item = resp.getJSONObject(i)
                     list.add(i, Artist(artistId = item.getInt("id"),name = item.getString("name"), image = item.getString("image"), birthDate = item.getString("birthDate").split("T").toTypedArray()[0], description = item.getString("description"), albumes = "", prizes = ""))
                 }
-                onComplete(list)
+                cont.resume(list)
             },
             Response.ErrorListener {
-                onError(it)
+                cont.resumeWithException(it)
             }))
     }
-    fun getArtist(artistId:Int, onComplete:(resp:List<Artist>)->Unit, onError: (error:VolleyError)->Unit){
+    suspend fun getArtist(artistId:Int)=suspendCoroutine<List<Artist>>{cont->
         requestQueue.add(getRequest("Musicians/$artistId",
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
@@ -150,12 +147,10 @@ class NetworkServiceAdapter constructor(context: Context) {
                 }*/
 
                 list.add(0, Artist(artistId = resp.getInt("id"),name = resp.getString("name"), image = resp.getString("image"), birthDate = resp.getString("birthDate").split("T").toTypedArray()[0], description = resp.getString("description"), albumes = albumes, prizes = prizes))
-
-
-                onComplete(list)
+                cont.resume(list)
             },
             Response.ErrorListener {
-                onError(it)
+                cont.resumeWithException(it)
             }))
     }
 
