@@ -1,7 +1,7 @@
 # MISW-DesarrolloMovil-202215
 
 # VinilosAPP_G18
-Vinilos es una aplicación para dispositivos Android para explorar tus gustos musicales , en este reléase v1.1.0, encontra funcionalidades como listar álbumes y consultar el detalle del álbum seleccionado,listar artistas , consultar detalle del artista seleccionado y consultar listado de coleccionistas
+Vinilos es una aplicación para dispositivos Android para explorar tus gustos musicales , en este reléase v1.1.0, encontra funcionalidades como listar álbumes y consultar el detalle del álbum seleccionado,listar artistas , consultar detalle del artista seleccionado y consultar listado de coleccionistas.
 La aplicación utiliza conectividad a internet así que asegúrese de tener una conexión  activa
 
 ## IDE de desarrollo
