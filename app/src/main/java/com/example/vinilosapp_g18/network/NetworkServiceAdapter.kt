@@ -2,6 +2,7 @@ package com.example.vinilosapp_g18.network
 
 
 import android.content.Context
+import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -18,6 +19,7 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
+   var glbJsonStrPremios:String=""
     companion object{
         const val BASE_URL= "https://back-backvynils-grupo18.herokuapp.com/"
         var instance: NetworkServiceAdapter? = null
@@ -31,6 +33,11 @@ class NetworkServiceAdapter constructor(context: Context) {
     private val requestQueue: RequestQueue by lazy {
         // applicationContext keeps you from leaking the Activity or BroadcastReceiver if someone passes one in.
         Volley.newRequestQueue(context.applicationContext)
+    }
+
+    fun onCallback2(response: String): String {
+        glbJsonStrPremios=response
+        return response
     }
     suspend fun getAlbums() = suspendCoroutine<List<Album>>{ cont->
         requestQueue.add(getRequest("albums",
@@ -81,8 +88,6 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
 
-
-
     suspend fun getColeccionistas()=suspendCoroutine<List<Coleccionista>>{cont->
         requestQueue.add(getRequest("collectors",
             Response.Listener<String> { response ->
@@ -120,6 +125,7 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
     suspend fun getArtist(artistId:Int)=suspendCoroutine<List<Artist>>{cont->
+        getAllPrizes()
         requestQueue.add(getRequest("Musicians/$artistId",
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
@@ -127,24 +133,67 @@ class NetworkServiceAdapter constructor(context: Context) {
                 var albumes: String= ""
                 var prizes: String= ""
                 val arrAlbumes: JSONArray = resp.getJSONArray("albums")
-                val arrPrizes: JSONArray = resp.getJSONArray("performerPrizes")
+                val arrPrizesMusico: JSONArray = resp.getJSONArray("performerPrizes")
+
+
 
                 for (i in 0 until arrAlbumes.length()) {
                     albumes += arrAlbumes.getJSONObject(i).getString("name") + "\n"
+                }
+
+                var id_prize:String
+                var nombre_premio:String
+                var fecha_premio:String
+                val arrPremios = JSONArray(glbJsonStrPremios)
+                var _premio:JSONObject
+                var  arrPrizesMusicos2:JSONArray
+                for (i in 0 until arrPrizesMusico.length()) {
+
+                    id_prize=arrPrizesMusico.getJSONObject(i).getString("id")
+                    fecha_premio=arrPrizesMusico.getJSONObject(i).getString("premiationDate")
+
+                    for (j in 0 until arrPremios.length()) {
+                        _premio=arrPremios.getJSONObject(j)
+                        nombre_premio=_premio.getString("name")
+                        arrPrizesMusicos2 =JSONArray(_premio.get("performerPrizes").toString())
+                        for (k in 0 until arrPrizesMusicos2.length())
+                            {
+                                if (arrPrizesMusicos2.getJSONObject(k).getString("id") ==id_prize)
+                                {
+                                        prizes += nombre_premio + " " + arrPrizesMusicos2.getJSONObject(k).getString("premiationDate").split("T").toTypedArray()[0]+"\n"
+                                }
+
+
+                        }
+
+                    }
+
+                   // prizes += arrPrizesMusico.getJSONObject(i).getString("name") + "\n"
 
                 }
 
-                /*for (i in 0 until arrPrizes.length()) {
-                    prizes += arrPrizes.getJSONObject(i).getString("name") + "\n"
-
-                }*/
-
                 list.add(0, Artist(artistId = resp.getInt("id"),name = resp.getString("name"), image = resp.getString("image"), birthDate = resp.getString("birthDate").split("T").toTypedArray()[0], description = resp.getString("description"), albumes = albumes, prizes = prizes))
+
                 cont.resume(list)
             },
             Response.ErrorListener {
                 cont.resumeWithException(it)
             }))
+    }
+
+    private fun getAllPrizes(){
+        // Instantiate the RequestQueue.
+        val url: String = "https://back-backvynils-grupo18.herokuapp.com/prizes"
+
+        // Request a string response from the provided URL.
+        val stringReq = StringRequest(Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                var strResp = response.toString()
+                glbJsonStrPremios=strResp
+            },
+            Response.ErrorListener {Log.d("API", "that didn't work") })
+        requestQueue.add(stringReq)
+
     }
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
