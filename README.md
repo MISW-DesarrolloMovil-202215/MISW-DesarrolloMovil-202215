@@ -1,7 +1,7 @@
 # MISW-DesarrolloMovil-202215
 
 # VinilosAPP_G18
-Vinilos es una aplicación para dispositivos Android para explorar tus gustos musicales , en este 1er reléase, encontra funcionalidades como listar álbumes y consultar el detalle del álbum seleccionado.
+Vinilos es una aplicación para dispositivos Android para explorar tus gustos musicales , en este reléase v1.1.0, encontra funcionalidades como listar álbumes y consultar el detalle del álbum seleccionado,listar artistas , consultar detalle del artista seleccionado y consultar listado de coleccionistas
 La aplicación utiliza conectividad a internet así que asegúrese de tener una conexión  activa
 
 ## IDE de desarrollo
@@ -15,7 +15,7 @@ Para asegurar que la aplicación pueda ejecutarse de manera correcta, la version
 
 dependencies {
 
-     implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -30,6 +30,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
 }
 
 Asegurarse que en Android/buildFeatures , este configurado a :
@@ -53,7 +54,14 @@ Finalmente, podrá ejecutar todas las pruebas del mismo modo en que corre la apl
 
 ## APK
 Descomprimir e instalar.
+
+v1.1.0
+[VinilosAppV1.1.0.zip](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/files/10053191/VinilosAppV1.1.0.zip)
+
+v1.0.0
 [VinilosApp.zip](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/files/9948271/VinilosApp.zip)
 
 ## Releases
+[V1.1.0](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/releases/tag/v1.1.0)
+
 [V1.0.0](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/releases/tag/v1.0.0)
