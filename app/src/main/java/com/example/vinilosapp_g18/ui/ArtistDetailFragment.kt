@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vinilosapp_g18.R
 import com.example.vinilosapp_g18.databinding.ArtistDetailFragmentBinding
 import com.example.vinilosapp_g18.models.Artist
 import com.example.vinilosapp_g18.ui.adapters.ArtistDetailAdapter

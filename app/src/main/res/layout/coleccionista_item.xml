@@ -19,11 +19,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:strokeColor="#eeeeee"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeWidth="2dp">
+            app:strokeWidth="5dp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="100dp"
                 android:layout_marginStart="10dp">
 
@@ -31,9 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
-                    android:orientation="vertical"
-
-                    >
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -42,7 +40,7 @@
                             android:id="@+id/text_coleccionista_nombre"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingTop="1dp"
+                            android:paddingTop="3dp"
                             android:textColor="#000000"
                             android:textSize="20sp"
                             android:textStyle="bold"
@@ -51,7 +49,8 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -64,7 +63,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingTop="3dp"
-                            android:layout_marginStart="63dp"
+                            android:layout_marginStart="70dp"
                             android:textSize="15sp"
                             android:textColor="#808080"
                             android:text="@{coleccionista.telephone}"/>
@@ -74,8 +73,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        >
+                        android:layout_marginBottom="20dp">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -83,13 +81,13 @@
                             android:paddingTop="3dp"
                             android:textSize="15sp"
                             android:textColor="#808080"
-                            android:text="e-mail: "/>
+                            android:text="Correo: "/>
                         <TextView
                             android:id="@+id/text_coleccionista_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingTop="3dp"
-                            android:layout_marginStart="53dp"
+                            android:layout_marginStart="70dp"
                             android:textSize="15sp"
                             android:textColor="#808080"
                             android:text="@{coleccionista.email}"/>
@@ -100,6 +98,20 @@
                 </LinearLayout>
 
             </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginVertical="38dp"
+                android:layout_gravity="right"
+                android:orientation="horizontal"
+                android:layout_marginEnd="10dp">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:src="@drawable/fondo_coleccionista"/>
+            </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

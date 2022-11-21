@@ -3,14 +3,16 @@ package com.example.vinilosapp_g18.ui
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import androidx.test.platform.app.InstrumentationRegistry
 import com.example.vinilosapp_g18.R
 import org.hamcrest.Description
 import org.hamcrest.Matcher
@@ -18,36 +20,21 @@ import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.IsInstanceOf
-import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-
-class HU01_ListarAlbumesTest_Esc1 {
+class HU04_DetalleArtistasTest_Esc1 {
 
     @Rule
     @JvmField
     var mActivityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun listarAlbumesTest() {
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        Assert.assertEquals("com.example.vinilosapp_g18", appContext.packageName)
-
-        Thread.sleep(2000)
-        val linearLayout = onView(
-            allOf(
-                withId(R.id.hometext),
-                withParent(withParent(withId(android.R.id.content))),
-                isDisplayed()
-            )
-        )
-        linearLayout.check(matches(isDisplayed()))
-
-        val textView = onView(
+    fun DetalleArtistasTest() {
+        val menuTextView = onView(
             allOf(
                 withText("Vinilos"),
                 withParent(
@@ -59,11 +46,12 @@ class HU01_ListarAlbumesTest_Esc1 {
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Vinilos")))
+        menuTextView.check(matches(withText("Vinilos")))
 
-        val textView2 = onView(
+        Thread.sleep(2000)
+        val textView7 = onView(
             allOf(
-                withText("Explorar el mundo a través de tus oidos."),
+                withText("Vinilos"),
                 withParent(
                     allOf(
                         withId(R.id.hometext),
@@ -73,52 +61,121 @@ class HU01_ListarAlbumesTest_Esc1 {
                 isDisplayed()
             )
         )
-        textView2.check(matches(withText("Explorar el mundo a través de tus oidos.")))
+        textView7.check(matches(isDisplayed()))
 
 
-        val linearLayout2 = onView(
+        val linearLayout = onView(
             allOf(
                 withId(R.id.menu),
                 withParent(withParent(withId(android.R.id.content))),
                 isDisplayed()
             )
         )
-        linearLayout2.check(matches(isDisplayed()))
+        linearLayout.check(matches(isDisplayed()))
 
-        val view = onView(
+        val imageButton = onView(
             allOf(
-                withId(android.R.id.statusBarBackground),
-                withParent(IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java)),
+                withId(R.id.artistas),
+                withParent(withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java))),
                 isDisplayed()
             )
         )
-        view.check(matches(isDisplayed()))
+        imageButton.check(matches(isDisplayed()))
 
-        val albumsButton = onView(
+        val button = onView(
             allOf(
-                withId(R.id.albumes2), withText("Albumes"),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("android.widget.LinearLayout")),
-                        0
-                    ),
-                    1
+                withId(R.id.artistas2), withText("ARTISTAS"),
+                withParent(withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java))),
+                isDisplayed()
+            )
+        )
+        button.check(matches(isDisplayed()))
+
+        val viewGroup = onView(
+            allOf(
+                withParent(
+                    allOf(
+                        withId(android.R.id.content),
+                        withParent(withId(com.bumptech.glide.R.id.action_bar_root))
+                    )
                 ),
                 isDisplayed()
             )
         )
-        albumsButton.perform(click())
+        viewGroup.check(matches(isDisplayed()))
 
-
-        Thread.sleep(3000)
-        val recyclerView = onView(
+        val appCompatImageButton = onView(
             allOf(
-                withId(R.id.albumsRv),
+                withId(R.id.artistas),
+                childAtPosition(
+                    childAtPosition(
+                        withClassName(`is`("android.widget.LinearLayout")),
+                        1
+                    ),
+                    0
+                ),
                 isDisplayed()
             )
         )
+        appCompatImageButton.perform(click())
+        Thread.sleep(3000)
+        
+
+        val recyclerView = onView(
+            allOf(
+                withId(R.id.artistRv),
+                isDisplayed()
+            )
+        )
+
         recyclerView.check(matches((isDisplayed())))
+
+        recyclerView.perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
+            )
+        )
+
+        Thread.sleep(2000)
+
+        val recyclerView2 = onView(
+            allOf(
+                withId(R.id.commentsRv),
+                isDisplayed()
+            )
+        )
+        recyclerView2.check(matches(isDisplayed()))
+
+        Thread.sleep(1000)
+
+        val imageView = onView(
+            allOf(
+                withId(R.id.imageDetail),
+                isDisplayed()
+            )
+        )
+        imageView.check(matches(isDisplayed()))
+
+        val textView = onView(
+            allOf(
+                withId(R.id.textView6),
+                childAtPosition(
+                    childAtPosition(
+                        withClassName(`is`("android.widget.LinearLayout")),
+                        1
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+
+        )
+        textView.check(matches(isDisplayed()))
+        Thread.sleep(1500)
+
     }
+
 
     private fun childAtPosition(
         parentMatcher: Matcher<View>, position: Int
@@ -138,4 +195,3 @@ class HU01_ListarAlbumesTest_Esc1 {
         }
     }
 }
-

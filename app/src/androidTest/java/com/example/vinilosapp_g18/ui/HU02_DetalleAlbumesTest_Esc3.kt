@@ -108,18 +108,19 @@ class HU02_DetalleAlbumesTest_Esc3 {
 
         recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
 
-        val cover = onView(
+        val albumName = onView(
             allOf(
-                withId(R.id.text_cover),
+                withId(R.id.textView6),
                 isDisplayed()
             )
         )
 
+
         Thread.sleep(2000)
 
         for (i in 1..5){
-            cover.perform(click())
-            cover.check(matches(isDisplayed()))
+            albumName.perform(click())
+            albumName.check(matches(isDisplayed()))
             Thread.sleep(1000)
         }
     }

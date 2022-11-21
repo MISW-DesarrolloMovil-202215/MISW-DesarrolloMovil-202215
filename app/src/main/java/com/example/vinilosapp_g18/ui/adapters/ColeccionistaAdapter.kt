@@ -5,19 +5,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilosapp_g18.R
 import com.example.vinilosapp_g18.databinding.ColeccionistaItemBinding
 import com.example.vinilosapp_g18.models.Coleccionista
-import com.example.vinilosapp_g18.ui.ColeccionistaFragment
+
 
 class ColeccionistaAdapter : RecyclerView.Adapter<ColeccionistaAdapter.ColeccionistaViewHolder>(){
 
     var colecionista :List<Coleccionista> = emptyList()
         set(value) {
             field = value
-            notifyDataSetChanged()
+            notifyItemChanged(0)
+            notifyItemInserted(0)
+            notifyItemRemoved(0)
+            notifyItemRangeChanged(0, -1)
+            notifyItemRangeInserted(0, -1)
+            notifyItemRangeRemoved(0, -1)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColeccionistaViewHolder {

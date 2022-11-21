@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/albumFragment">
+    app:startDestination="@id/albumFragment"
+    tools:keep="@navigation/nav_graph">
 
     <fragment
         android:id="@+id/albumFragment"
@@ -26,13 +27,11 @@
     </fragment>
 
 
-
     <fragment
         android:id="@+id/coleccionistaFragment"
         android:name="com.example.vinilosapp_g18.ui.ColeccionistaFragment"
         android:label="album_detail_fragment"
         tools:layout="@layout/coleccionista_fragment" >
-
     </fragment>
 
 </navigation>
