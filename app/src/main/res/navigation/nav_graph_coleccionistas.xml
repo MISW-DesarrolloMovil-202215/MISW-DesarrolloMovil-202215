@@ -7,9 +7,21 @@
     <fragment
         android:id="@+id/coleccionistaFragment"
         android:name="com.example.vinilosapp_g18.ui.ColeccionistaFragment"
-        android:label="album_detail_fragment"
+        android:label="coleccionista_fragment"
         tools:layout="@layout/coleccionista_fragment" >
+        <action
+            android:id="@+id/action_coleccionistaFragment_to_coleccionistaDetailFragment"
+            app:destination="@id/coleccionistaDetailFragment" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/coleccionistaDetailFragment"
+        android:name="com.example.vinilosapp_g18.ui.ColeccionistaDetailFragment"
+        android:label="coleccionista_detail_fragment"
+        tools:layout="@layout/coleccionista_detail_fragment" >
+        <argument
+            android:name="coleccionistaId"
+            app:argType="integer" />
     </fragment>
 
 
