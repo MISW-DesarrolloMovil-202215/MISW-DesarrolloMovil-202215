@@ -6,12 +6,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <Button
-        android:id="@+id/btnCreateAlbum"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_crear_album" />
+        android:gravity="center"
+        android:layout_gravity="end"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btnCreateAlbum2"
+            android:layout_width="99dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="63dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/album_nuevo"></ImageButton>
+        <Button
+            android:id="@+id/btnCreateAlbum"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:text="Crear Album"
+            android:textSize="8dp"
+            android:layout_marginTop="35dp"
+            android:textColor="#ffffff"></Button>
+    </RelativeLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"

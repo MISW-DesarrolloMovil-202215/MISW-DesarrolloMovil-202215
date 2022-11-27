@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import com.example.vinilosapp_g18.CreateAlbum
 import com.example.vinilosapp_g18.R
 
@@ -16,6 +17,13 @@ class ListAlbumes : AppCompatActivity() {
 
         val btnCreateAlbum = findViewById<Button>(R.id.btnCreateAlbum)
         btnCreateAlbum.setOnClickListener {
+            val intent = Intent(this, CreateAlbum::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        val btnCreateAlbum2 = findViewById<ImageButton>(R.id.btnCreateAlbum2)
+        btnCreateAlbum2.setOnClickListener {
             val intent = Intent(this, CreateAlbum::class.java)
             startActivity(intent)
             finish()
