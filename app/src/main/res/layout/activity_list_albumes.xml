@@ -7,6 +7,11 @@
     android:orientation="vertical">
 
 
+    <Button
+        android:id="@+id/btnCreateAlbum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_crear_album" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"

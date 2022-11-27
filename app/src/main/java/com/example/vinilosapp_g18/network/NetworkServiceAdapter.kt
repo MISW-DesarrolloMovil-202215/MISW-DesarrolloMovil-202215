@@ -6,6 +6,7 @@ import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -193,7 +194,17 @@ class NetworkServiceAdapter constructor(context: Context) {
             },
             Response.ErrorListener {Log.d("API", "that didn't work") })
         requestQueue.add(stringReq)
+    }
 
+    fun postNewAlbum(body: JSONObject){
+        requestQueue.add(postRequest("albums",
+            body,
+            Response.Listener<JSONObject> { response ->
+                var strResp = response.toString()
+                Log.d("API", strResp)
+            }, Response.ErrorListener {Log.d("API", "that didn't work")
+                Exception("Error")
+            }))
     }
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
