@@ -41,7 +41,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:orientation="vertical"
-                android:layout_marginTop="105dp">
+                android:layout_marginTop="115dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -183,11 +183,12 @@
                             android:layout_marginStart="10dp"
                             app:cardCornerRadius="20dp"
                             app:cardElevation="0dp"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginBottom="15dp">
                             <ImageView
                                 android:id="@+id/image_collector_album"
                                 android:layout_width="match_parent"
-                                android:layout_centerHorizontal="true"
+                                android:layout_gravity="center_vertical"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="0dp"
                                 android:scaleType="fitXY"
@@ -244,6 +245,7 @@
                             android:layout_height="80dp"
                             android:layout_marginStart="10dp"
                             app:cardCornerRadius="20dp"
+                            android:layout_gravity="center_vertical"
                             app:cardElevation="0dp">
                             <ImageView
                                 android:id="@+id/image_favorite_performers"
