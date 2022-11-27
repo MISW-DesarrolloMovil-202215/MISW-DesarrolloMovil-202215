@@ -131,7 +131,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 val arrComments: JSONArray = resp.getJSONArray("comments")
                 val arrCollectorAlbums: JSONArray = resp.getJSONArray("collectorAlbums")
                 for (i in 0 until arrFavorite.length()) {
-                    favoritePerformers += arrFavorite.getJSONObject(i).getString("name") + ".\n" +  "Descripción: " + arrFavorite.getJSONObject(i).getString("description")  + "\n" + "\n"
+                    favoritePerformers += "NOMBRE: " +arrFavorite.getJSONObject(i).getString("name")+ "\n" + "\n" +  "DESCRIPCIÓN: " + arrFavorite.getJSONObject(i).getString("description")  + "\n"
                     imagefavoritePerformers+=arrFavorite.getJSONObject(i).getString("image")
                 }
                 var id_album:String
@@ -147,14 +147,14 @@ class NetworkServiceAdapter constructor(context: Context) {
                         imagen_album=_album.getString("cover")
                         if (arrAlbum.getJSONObject(j).getString("id") ==id_album)
                         {
-                            collectorAlbums += nombre_album + " " + arrCollectorAlbums.getJSONObject(i).getString("price")+"\n"+arrCollectorAlbums.getJSONObject(i).getString("status")
+                            collectorAlbums += "NOMBRE: " +nombre_album + "\n"+ "\n"+  "PRECIO: " +arrCollectorAlbums.getJSONObject(i).getString("price")+"\n"+"\n"+"ESTADO: " +arrCollectorAlbums.getJSONObject(i).getString("status")+"\n"
                             imagecollectorAlbums +=imagen_album
                         }
                     }
                     // prizes += arrPrizesMusico.getJSONObject(i).getString("name") + "\n"
                 }
                 for (i in 0 until arrComments.length()) {
-                    comments += arrComments.getJSONObject(i).getString("description") + ".\n" + "Calificación: " + arrComments.getJSONObject(i).getString("rating") + "\n" + "\n"
+                    comments +="DESCRIPCIÓN: " +arrComments.getJSONObject(i).getString("description")+ "\n"  + "\n" + "CALIFICACIÓN: " + arrComments.getJSONObject(i).getString("rating") + "\n" + "\n"
                 }
 
                 list.add(0, Coleccionista(coleccionistaId = resp.getInt("id"),name = resp.getString("name"), telephone = resp.getString("telephone"), email = resp.getString("email"), imagefavoritePerformers = imagefavoritePerformers, comments = comments,favoritePerformers=favoritePerformers,collectorAlbums=collectorAlbums,imagecollectorAlbums=imagecollectorAlbums))

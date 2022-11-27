@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eeeeee"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".ui.ColeccionistaDetailFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -37,6 +37,7 @@
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/commentsRv"
+            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/coleccionista_detail_item"
