@@ -20,6 +20,7 @@ import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
    var glbJsonStrPremios:String=""
+    var glbJsonStrAlbum:String=""
     companion object{
         const val BASE_URL= "https://back-backvynils-grupo18.herokuapp.com/"
         var instance: NetworkServiceAdapter? = null
@@ -37,6 +38,10 @@ class NetworkServiceAdapter constructor(context: Context) {
 
     fun onCallback2(response: String): String {
         glbJsonStrPremios=response
+        return response
+    }
+    fun onCallback3(response: String): String {
+        glbJsonStrAlbum=response
         return response
     }
     suspend fun getAlbums() = suspendCoroutine<List<Album>>{ cont->
@@ -93,12 +98,15 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Coleccionista>()
-                var tracks: String= ""
+                var favoritePerformers: String= ""
                 var comments: String= ""
+                var imagefavoritePerformers: String=""
+                var imagecollectorAlbums: String=""
+                var collectorAlbums: String=""
                 var item: JSONObject
                 for (i in 0 until resp.length()) {
                     item = resp.getJSONObject(i)
-                    list.add(i, Coleccionista(coleccionistaId = item.getInt("id"),name = item.getString("name"),telephone= item.getString("telephone"),email= item.getString("email")))
+                    list.add(i, Coleccionista(coleccionistaId = item.getInt("id"),name = item.getString("name"),telephone= item.getString("telephone"),email= item.getString("email"),comments=comments,imagefavoritePerformers=imagefavoritePerformers,collectorAlbums=collectorAlbums,favoritePerformers=favoritePerformers,imagecollectorAlbums=imagecollectorAlbums))
 
                 }
                 cont.resume(list)
@@ -108,16 +116,66 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
     suspend fun getColeccionista(coleccionistaId:Int)=suspendCoroutine<List<Coleccionista>>{cont->
+        getAllAlbums()
         requestQueue.add(getRequest("collectors/$coleccionistaId",
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
+                var favoritePerformers: String=""
+                var imagefavoritePerformers: String=""
+                var collectorAlbums: String=""
+                var imagecollectorAlbums: String=""
+                var comments: String=""
+                var collector: String=""
                 val list = mutableListOf<Coleccionista>()
-                list.add(0, Coleccionista(coleccionistaId = resp.getInt("id"),name = resp.getString("name"), telephone = resp.getString("telephone"), email = resp.getString("email")))
+                val arrFavorite: JSONArray = resp.getJSONArray("favoritePerformers")
+                val arrComments: JSONArray = resp.getJSONArray("comments")
+                val arrCollectorAlbums: JSONArray = resp.getJSONArray("collectorAlbums")
+                for (i in 0 until arrFavorite.length()) {
+                    favoritePerformers += arrFavorite.getJSONObject(i).getString("name") + ".\n" +  "Descripción: " + arrFavorite.getJSONObject(i).getString("description")  + "\n" + "\n"
+                    imagefavoritePerformers+=arrFavorite.getJSONObject(i).getString("image")
+                }
+                var id_album:String
+                var nombre_album:String
+                var imagen_album:String
+                val arrAlbum = JSONArray(glbJsonStrAlbum)
+                var _album:JSONObject
+                for (i in 0 until arrCollectorAlbums.length()) {
+                    id_album=arrCollectorAlbums.getJSONObject(i).getString("id")
+                    for (j in 0 until arrAlbum.length()) {
+                        _album=arrAlbum.getJSONObject(j)
+                        nombre_album=_album.getString("name")
+                        imagen_album=_album.getString("cover")
+                        if (arrAlbum.getJSONObject(j).getString("id") ==id_album)
+                        {
+                            collectorAlbums += nombre_album + " " + arrCollectorAlbums.getJSONObject(i).getString("price")+"\n"+arrCollectorAlbums.getJSONObject(i).getString("status")
+                            imagecollectorAlbums +=imagen_album
+                        }
+                    }
+                    // prizes += arrPrizesMusico.getJSONObject(i).getString("name") + "\n"
+                }
+                for (i in 0 until arrComments.length()) {
+                    comments += arrComments.getJSONObject(i).getString("description") + ".\n" + "Calificación: " + arrComments.getJSONObject(i).getString("rating") + "\n" + "\n"
+                }
+
+                list.add(0, Coleccionista(coleccionistaId = resp.getInt("id"),name = resp.getString("name"), telephone = resp.getString("telephone"), email = resp.getString("email"), imagefavoritePerformers = imagefavoritePerformers, comments = comments,favoritePerformers=favoritePerformers,collectorAlbums=collectorAlbums,imagecollectorAlbums=imagecollectorAlbums))
                 cont.resume(list)
             },
             Response.ErrorListener {
                 cont.resumeWithException(it)
             }))
+    }
+    private fun getAllAlbums(){
+        // Instantiate the RequestQueue.
+        val url: String = "https://back-backvynils-grupo18.herokuapp.com/albums"
+        // Request a string response from the provided URL.
+        val stringReq = StringRequest(Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                var strResp = response.toString()
+                glbJsonStrAlbum=strResp
+            },
+            Response.ErrorListener {Log.d("API", "that didn't work") })
+        requestQueue.add(stringReq)
+
     }
 
     suspend fun getArtists()=suspendCoroutine<List<Artist>>{cont->
