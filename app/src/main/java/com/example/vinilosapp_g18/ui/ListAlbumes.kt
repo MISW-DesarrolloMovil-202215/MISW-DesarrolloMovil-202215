@@ -25,7 +25,8 @@ class ListAlbumes : AppCompatActivity() {
 
         val btnCreateAlbum2 = findViewById<ImageButton>(R.id.btnCreateAlbum2)
         btnCreateAlbum2.setOnClickListener {
-            val intent = Intent(this, CreateAlbum::class.java)
+            val intent = Intent(
+                this, CreateAlbum::class.java)
             startActivity(intent)
             finish()
         }

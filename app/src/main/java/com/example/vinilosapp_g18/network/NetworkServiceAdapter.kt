@@ -277,6 +277,14 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
 
+
+    fun get_AllAlbums():String{
+        getAllAlbums()
+        Log.d("glbJsonStrAlbum",glbJsonStrAlbum)
+        return glbJsonStrAlbum
+
+    }
+
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)
     }

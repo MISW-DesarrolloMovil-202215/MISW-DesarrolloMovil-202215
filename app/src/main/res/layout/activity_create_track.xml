@@ -42,7 +42,7 @@
             android:hint="Album:" />
 
         <Spinner
-            android:id="@+id/albumLabel_spinner"
+            android:id="@+id/album_spinner"
             android:layout_width="match_parent"
             android:textSize="15dp"
             android:text="  Album"
