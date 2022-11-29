@@ -107,6 +107,7 @@ class HU02_DetalleAlbumesTest_Esc2 {
         )
 
         recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
+        Thread.sleep(3000)
 
         val albumName = onView(
             allOf(
