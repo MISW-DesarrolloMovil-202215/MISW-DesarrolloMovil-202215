@@ -3,11 +3,16 @@ package com.example.vinilosapp_g18
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.vinilosapp_g18.models.Album
 import com.example.vinilosapp_g18.network.NetworkServiceAdapter
+import com.example.vinilosapp_g18.ui.ListAlbumes
 import com.example.vinilosapp_g18.viewmodels.AlbumViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
@@ -70,15 +75,35 @@ class CreateTrack : AppCompatActivity() {
         Log.d("function","ff")
         Log.d("function1","ff1")
         val lista= listOf<String>("","","","")
-
+        val listAlbumes2: List<Album> = listAlbumes
         val adaptadorDataSpinner:ArrayAdapter<Album> =ArrayAdapter<Album>(this,android.R.layout.simple_spinner_item,listAlbumes)
         adaptadorDataSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         Log.d("Xfunction1","Xff1X")
+
             this@CreateTrack.runOnUiThread(java.lang.Runnable {
+
         val spinner=this.findViewById<Spinner>(R.id.album_spinner)
+        val textTrackAlbum=this.findViewById<TextView>(R.id.text_tracks_album)
         Log.d("X2function1","Xff1X2")
 
         spinner.adapter=adaptadorDataSpinner
+                spinner.onItemSelectedListener=object :
+                    AdapterView.OnItemSelectedListener{
+                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                      //region configuracion trackAlbum
+
+                            textTrackAlbum.setText(listAlbumes2[position].tracks)
+
+                        //endregion
+
+                       Toast.makeText(this@CreateTrack,listAlbumes2[position].tracks.toString(),Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onNothingSelected(p0: AdapterView<*>?) {
+                        TODO("Not yet implemented")
+                    }
+                }
             })
         Log.d("X3function1","Xff1X3")
     }).start()

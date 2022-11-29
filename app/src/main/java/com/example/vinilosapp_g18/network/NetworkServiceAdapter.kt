@@ -55,6 +55,12 @@ class NetworkServiceAdapter constructor(context: Context) {
                 var item: JSONObject
                 for (i in 0 until resp.length()) {
                     item = resp.getJSONObject(i)
+                    val arrayTracks: JSONArray = item.getJSONArray("tracks")
+                    tracks=""
+                    for (j in 0 until arrayTracks.length()) {
+                        tracks += arrayTracks.getJSONObject(j).getString("name") + "    " + arrayTracks.getJSONObject(j).getString("duration") + "\n"
+
+                    }
                     list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate").split("T").toTypedArray()[0], genre = item.getString("genre"), description = item.getString("description"), tracks = tracks, comments = comments))
                 }
                 cont.resume(list)

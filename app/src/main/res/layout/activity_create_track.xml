@@ -97,7 +97,7 @@
             android:layout_marginStart="25dp"
             android:text="Pista:" />
         <TextView
-            android:id="@+id/text_tracks"
+            android:id="@+id/text_tracks_album"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -105,7 +105,7 @@
             android:textColor="#000000"
             android:layout_marginEnd="25dp"
             android:layout_marginStart="130dp"
-            android:text="@{trackAlbum.name}" />
+            android:text="-" />
 
 
 
