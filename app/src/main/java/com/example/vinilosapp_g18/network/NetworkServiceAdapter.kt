@@ -284,6 +284,19 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
 
+   fun postNewTrack(body: JSONObject,idAlbum:String){
+        requestQueue.add(postRequest("albums/"+idAlbum+"/tracks",
+            body,
+            Response.Listener<JSONObject> { response ->
+                var strResp = response.toString()
+                Log.d("API", strResp)
+                return@Listener
+
+            }, Response.ErrorListener {Log.d("API", "that didn't work")
+                Exception("Error")
+            }))
+    }
+
     fun get_AllAlbums():String{
         getAllAlbums()
         Log.d("glbJsonStrAlbum",glbJsonStrAlbum)

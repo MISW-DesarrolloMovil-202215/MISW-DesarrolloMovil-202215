@@ -4,11 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.example.vinilosapp_g18.models.Album
 import com.example.vinilosapp_g18.network.NetworkServiceAdapter
@@ -20,13 +16,18 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 import kotlin.coroutines.resume
 import kotlinx.coroutines.*
+import org.json.JSONObject
 import kotlin.coroutines.*
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.encodeToString
+
 
 
 class CreateTrack : AppCompatActivity() {
     private val scope = CoroutineScope(newSingleThreadContext("name"))
     private lateinit var viewModel: AlbumViewModel
-
+   lateinit var  albumSeleccionado:Album
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_track)
@@ -55,7 +56,10 @@ class CreateTrack : AppCompatActivity() {
 
 
 
-                ff(listNameAlbum,listIdsAlbum, listAlbum!!)
+                ConfigurarComboAlbumes(listAlbum!!)
+
+
+
             }
             else
             {
@@ -68,9 +72,48 @@ class CreateTrack : AppCompatActivity() {
 
 
 
+
+        val btnCreateAlbum = findViewById<Button>(R.id.btn_newAlbum)
+        btnCreateAlbum.setOnClickListener {
+
+            val trackDuration:String=findViewById<EditText>(R.id.trackDuration_text_input).text.toString()
+
+            val trackName :String= findViewById<EditText>(R.id.trackName_text_input).text.toString()
+            val albumId :String= this.findViewById<Spinner>(R.id.album_spinner).selectedItemId.toString()
+            val albumNamew :String= this.findViewById<Spinner>(R.id.album_spinner).selectedItem.toString()
+
+
+           // ((Zones)yourSpinner.getSelectedItem)).getId();
+
+          //val alb:Album
+           // var gg= this.findViewById<Spinner>(R.id.album_spinner).selectedItem
+            //((Album) gg)
+            val msg:String= trackDuration + "-"+trackName +"-"+ albumId.toString()+"-" +albumNamew +"sel:"+ albumSeleccionado.albumId.toString()
+
+            Toast.makeText(this@CreateTrack,msg,Toast.LENGTH_LONG).show()
+
+
+
+            val trackAlbum = JSONObject();
+            trackAlbum.put("name", trackName)
+            trackAlbum.put("duration", trackDuration)
+           // trackAlbum.put("idAlbum", albumSeleccionado.albumId)
+            Log.d("Antes Button POST","Antes Button")
+            var returnNewTrack=  NetworkServiceAdapter.getInstance(application).postNewTrack(trackAlbum,albumSeleccionado.albumId.toString())
+            Log.d("Despues Button POST","Despues Button")
+            val strResult=Json.encodeToString(returnNewTrack)
+
+            Toast.makeText(this@CreateTrack, strResult ,Toast.LENGTH_LONG).show()
+
+
+
+
+           // getalbumId
+        }
+
     }
 
-    fun ff(listNombreAlbumes: List<String>,listIdAlbumes: List<Int>,listAlbumes: List<Album>){
+    fun ConfigurarComboAlbumes(listAlbumes: List<Album>){
         Thread(Runnable {
         Log.d("function","ff")
         Log.d("function1","ff1")
@@ -94,10 +137,12 @@ class CreateTrack : AppCompatActivity() {
                       //region configuracion trackAlbum
 
                             textTrackAlbum.setText(listAlbumes2[position].tracks)
+                        albumSeleccionado=listAlbumes2[position]
 
                         //endregion
 
                        Toast.makeText(this@CreateTrack,listAlbumes2[position].tracks.toString(),Toast.LENGTH_LONG).show()
+                       // Toast.makeText(this@CreateTrack,listAlbumes2[position].tracks.toString(),Toast.LENGTH_LONG).show()
                     }
 
                     override fun onNothingSelected(p0: AdapterView<*>?) {

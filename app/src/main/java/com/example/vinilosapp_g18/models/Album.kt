@@ -1,6 +1,7 @@
 package com.example.vinilosapp_g18.models
 
-import java.util.jar.Attributes.Name
+import android.R.id
+
 
 data class Album(
 val albumId:Int,
@@ -17,6 +18,11 @@ val comments:String
 {
 
     override fun toString(): String {
-        return  name
+       return  name
+   }
+
+
+       public fun getid():Int{
+        return albumId
     }
 }
