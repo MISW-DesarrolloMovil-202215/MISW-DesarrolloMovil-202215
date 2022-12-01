@@ -58,6 +58,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val arrayTracks: JSONArray = item.getJSONArray("tracks")
                     tracks=""
                     for (j in 0 until arrayTracks.length()) {
+
                         tracks += arrayTracks.getJSONObject(j).getString("name") + "    " + arrayTracks.getJSONObject(j).getString("duration") + "\n"
 
                     }
@@ -302,6 +303,29 @@ class NetworkServiceAdapter constructor(context: Context) {
         Log.d("glbJsonStrAlbum",glbJsonStrAlbum)
         return glbJsonStrAlbum
 
+    }
+
+
+
+    suspend fun postTrackToAlbum(body: JSONObject,idAlbum:String)=suspendCoroutine<JSONObject>{cont->
+        requestQueue.add(postRequest("albums/"+idAlbum+"/tracks",
+            body,
+            Response.Listener<JSONObject> { response ->
+
+                // val resp = JSONArray(response)
+                //val list = mutableListOf<Artist>()
+                //var item: JSONObject
+                //for (i in 0 until resp.length()) {
+                //  item = resp.getJSONObject(i)
+                // list.add(i, Artist(artistId = item.getInt("id"),name = item.getString("name"), image = item.getString("image"), birthDate = item.getString("birthDate").split("T").toTypedArray()[0], description = item.getString("description"), albumes = "", prizes = ""))
+
+                //}
+                Log.d("APIPOSTTRAC",response.toString())
+                cont.resume(response)
+            },
+            Response.ErrorListener {
+                cont.resumeWithException(it)
+            }))
     }
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {

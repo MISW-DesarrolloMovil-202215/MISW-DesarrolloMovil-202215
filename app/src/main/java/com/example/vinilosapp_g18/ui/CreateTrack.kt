@@ -21,7 +21,7 @@ import kotlin.coroutines.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.encodeToString
-
+import org.json.JSONStringer
 
 
 class CreateTrack : AppCompatActivity() {
@@ -76,6 +76,9 @@ class CreateTrack : AppCompatActivity() {
         val btnCreateAlbum = findViewById<Button>(R.id.btn_newAlbum)
         btnCreateAlbum.setOnClickListener {
 
+
+
+
             val trackDuration:String=findViewById<EditText>(R.id.trackDuration_text_input).text.toString()
 
             val trackName :String= findViewById<EditText>(R.id.trackName_text_input).text.toString()
@@ -93,19 +96,23 @@ class CreateTrack : AppCompatActivity() {
             Toast.makeText(this@CreateTrack,msg,Toast.LENGTH_LONG).show()
 
 
-
+            GlobalScope.launch {
             val trackAlbum = JSONObject();
             trackAlbum.put("name", trackName)
             trackAlbum.put("duration", trackDuration)
            // trackAlbum.put("idAlbum", albumSeleccionado.albumId)
-            Log.d("Antes Button POST","Antes Button")
-            var returnNewTrack=  NetworkServiceAdapter.getInstance(application).postNewTrack(trackAlbum,albumSeleccionado.albumId.toString())
+            Log.d("Antes Button POST BODY", trackAlbum["name"].toString())
+                    Log.d("albumSelecc.albumId",albumSeleccionado.albumId.toString())
+            var returnNewTrack=  NetworkServiceAdapter.getInstance(application).postTrackToAlbum(trackAlbum,albumSeleccionado.albumId.toString())
             Log.d("Despues Button POST","Despues Button")
-            val strResult=Json.encodeToString(returnNewTrack)
 
-            Toast.makeText(this@CreateTrack, strResult ,Toast.LENGTH_LONG).show()
+            Log.d("Idtrack",returnNewTrack["id"].toString())
 
+               // Toast.makeText(this@CreateTrack, returnNewTrack["id"].toString() ,Toast.LENGTH_LONG).show()
 
+                listAlbum=  NetworkServiceAdapter.getInstance(application).getAlbums()
+                ConfigurarComboAlbumes(listAlbum!!)
+            }
 
 
            // getalbumId
