@@ -17,12 +17,10 @@ val comments:String
 )
 {
 
-    override fun toString(): String {
+override fun toString(): String {
        return  name
    }
 
 
-       public fun getid():Int{
-        return albumId
-    }
+
 }

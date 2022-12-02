@@ -47,8 +47,6 @@ class CreateTrack : AppCompatActivity() {
                 val listNameAlbum= listAlbum!!.map { it.name }
                 val listIdsAlbum= listAlbum!!.map { it.albumId }
 
-             //   val adaptadorDataSpinner=ArrayAdapter(CoroutineScope ,android.R.layout.simple_spinner_item,lista)
-
                 Log.d("jsonAlbunes","tiene algo")
                 Log.d("jsonAlbunes2",listAlbum!!.count().toString())
                 Log.d("listNameAlbum",listNameAlbum!!.count().toString())
@@ -62,10 +60,10 @@ class CreateTrack : AppCompatActivity() {
             }
             else
             {
-            Log.d("jsonAlbunes","null")
+                Log.d("jsonAlbunes","null")
             }
 
-            Log.d("FIN","FIN")
+
 
     }
 
@@ -87,9 +85,11 @@ class CreateTrack : AppCompatActivity() {
             val trackDuration:String=txtTracDuration.text.toString().trim()
             var msgError:String=""
             var error:Boolean=false
+            //expresion regular para evaluar input de la duracion (5:00-99:59)
             val patter=Regex("([01]?[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9]):[0-5][0-9]")
             if (trackName.trim().isEmpty())
             {
+                txtTrackName.requestFocus()
                 msgError="* El nombre del track no puede estar vacio"+"\n"
                 error=true
             }
@@ -101,12 +101,13 @@ class CreateTrack : AppCompatActivity() {
 
             if (trackDuration.isNullOrEmpty())
             {
+                txtTracDuration.requestFocus()
                 msgError +="* Debe ingresar una valor para la duración de la pista"+"\n"
                 error=true
 
             }else if(! patter.matches(trackDuration))
                 {
-
+                    txtTracDuration.requestFocus()
                     msgError +="* Duración no valida ej. 3:50,99:59"+"\n"
                     error=true
                 }
@@ -160,18 +161,16 @@ class CreateTrack : AppCompatActivity() {
 
     fun ConfigurarComboAlbumes(listAlbumes: List<Album>, SeleccionarItemSpinner:Boolean){
         Thread(Runnable {
-        Log.d("function","ff")
-        Log.d("function1","ff1")
-        val lista= listOf<String>("","","","")
+
         val listAlbumes2: List<Album> = listAlbumes
         val adaptadorDataSpinner:ArrayAdapter<Album> =ArrayAdapter<Album>(this,android.R.layout.simple_spinner_item,listAlbumes)
         adaptadorDataSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
 
-          this@CreateTrack.runOnUiThread(java.lang.Runnable {
+        this@CreateTrack.runOnUiThread(java.lang.Runnable {
         val spinner=this.findViewById<Spinner>(R.id.album_spinner)
         val textTrackAlbum=this.findViewById<TextView>(R.id.text_tracks_album)
-        //val imageViewCoverAlbum=this.findViewById<TextView>(R.id.album_cover_imageDetail)
+        val imageViewCoverAlbum=this.findViewById<ImageView>(R.id.coverAlbumTrack_ImageView)
 
         spinner.adapter=adaptadorDataSpinner
                 spinner.onItemSelectedListener=object :
@@ -179,7 +178,7 @@ class CreateTrack : AppCompatActivity() {
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
 
-                     //   Glide.with(this@CreateTrack).load(listAlbumes2[position].cover).into(imageViewCoverAlbum)
+                    Glide.with(this@CreateTrack).load(listAlbumes2[position].cover).into(imageViewCoverAlbum)
                         //region configuracion trackAlbum
 
                         textTrackAlbum.setText(listAlbumes2[position].tracks)
