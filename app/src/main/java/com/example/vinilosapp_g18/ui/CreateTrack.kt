@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.vinilosapp_g18.models.Album
 import com.example.vinilosapp_g18.network.NetworkServiceAdapter
 import com.example.vinilosapp_g18.ui.ListAlbumes
@@ -32,12 +33,10 @@ class CreateTrack : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_track)
 
-      //  viewModel = ViewModelProvider(this, AlbumViewModel.Factory(this.application)).get(AlbumViewModel::class.java)
+
 
 
         var listAlbum: List<Album>? = null
-        val lista= listOf<String>("","","","")
-       // val adaptadorDataSpinner=ArrayAdapter(this,android.R.layout.simple_spinner_item,lista)
 
         GlobalScope.launch {
             listAlbum=  NetworkServiceAdapter.getInstance(application).getAlbums()
@@ -56,7 +55,7 @@ class CreateTrack : AppCompatActivity() {
 
 
 
-                ConfigurarComboAlbumes(listAlbum!!)
+                ConfigurarComboAlbumes(listAlbum!!,false)
 
 
 
@@ -72,55 +71,94 @@ class CreateTrack : AppCompatActivity() {
 
 
 
-
+        ///region Configuracion Boton Crear Tranck
+        var exitosoCrearTrack:Boolean=false
         val btnCreateAlbum = findViewById<Button>(R.id.btn_newAlbum)
+        val txtTrackName=findViewById<EditText>(R.id.trackName_text_input)
+        val txtTracDuration=findViewById<EditText>(R.id.trackDuration_text_input)
+        txtTrackName.setText("")
+        txtTracDuration.setText("")
+
         btnCreateAlbum.setOnClickListener {
 
-
-
-
-            val trackDuration:String=findViewById<EditText>(R.id.trackDuration_text_input).text.toString()
-
-            val trackName :String= findViewById<EditText>(R.id.trackName_text_input).text.toString()
+            val trackName :String= txtTrackName.text.toString().trim()
             val albumId :String= this.findViewById<Spinner>(R.id.album_spinner).selectedItemId.toString()
             val albumNamew :String= this.findViewById<Spinner>(R.id.album_spinner).selectedItem.toString()
-
-
-           // ((Zones)yourSpinner.getSelectedItem)).getId();
-
-          //val alb:Album
-           // var gg= this.findViewById<Spinner>(R.id.album_spinner).selectedItem
-            //((Album) gg)
-            val msg:String= trackDuration + "-"+trackName +"-"+ albumId.toString()+"-" +albumNamew +"sel:"+ albumSeleccionado.albumId.toString()
-
-            Toast.makeText(this@CreateTrack,msg,Toast.LENGTH_LONG).show()
-
-
-            GlobalScope.launch {
-            val trackAlbum = JSONObject();
-            trackAlbum.put("name", trackName)
-            trackAlbum.put("duration", trackDuration)
-           // trackAlbum.put("idAlbum", albumSeleccionado.albumId)
-            Log.d("Antes Button POST BODY", trackAlbum["name"].toString())
-                    Log.d("albumSelecc.albumId",albumSeleccionado.albumId.toString())
-            var returnNewTrack=  NetworkServiceAdapter.getInstance(application).postTrackToAlbum(trackAlbum,albumSeleccionado.albumId.toString())
-            Log.d("Despues Button POST","Despues Button")
-
-            Log.d("Idtrack",returnNewTrack["id"].toString())
-
-               // Toast.makeText(this@CreateTrack, returnNewTrack["id"].toString() ,Toast.LENGTH_LONG).show()
-
-                listAlbum=  NetworkServiceAdapter.getInstance(application).getAlbums()
-                ConfigurarComboAlbumes(listAlbum!!)
+            val trackDuration:String=txtTracDuration.text.toString().trim()
+            var msgError:String=""
+            var error:Boolean=false
+            val patter=Regex("([01]?[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9]):[0-5][0-9]")
+            if (trackName.trim().isEmpty())
+            {
+                msgError="* El nombre del track no puede estar vacio"+"\n"
+                error=true
+            }
+            if (albumId.trim().isEmpty())
+            {
+                msgError +="* Debe seleccionar un album"+"\n"
+                error=true
             }
 
+            if (trackDuration.isNullOrEmpty())
+            {
+                msgError +="* Debe ingresar una valor para la duración de la pista"+"\n"
+                error=true
 
-           // getalbumId
+            }else if(! patter.matches(trackDuration))
+                {
+
+                    msgError +="* Duración no valida ej. 3:50,99:59"+"\n"
+                    error=true
+                }
+
+            if(error) {
+                Toast.makeText(this@CreateTrack, msgError, Toast.LENGTH_LONG).show()
+            }
+            else
+            {
+
+                val msg:String= trackDuration + "-"+trackName +"-"+ albumId.toString()+"-" +albumNamew +"sel:"+ albumSeleccionado.albumId.toString()
+
+                //Toast.makeText(this@CreateTrack,msg,Toast.LENGTH_LONG).show()
+
+
+                GlobalScope.launch {
+                    val trackAlbum = JSONObject();
+                    trackAlbum.put("name", trackName)
+                    trackAlbum.put("duration", trackDuration)
+
+                    Log.d("Antes Button POST BODY", trackAlbum["name"].toString())
+                    Log.d("albumSelecc.albumId",albumSeleccionado.albumId.toString())
+                    var returnNewTrack=  NetworkServiceAdapter.getInstance(application).postTrackToAlbum(trackAlbum,albumSeleccionado.albumId.toString())
+                    Log.d("Despues Button POST","Despues Button")
+
+                    Log.d("Idtrack",returnNewTrack["id"].toString())
+                    if(returnNewTrack != null && returnNewTrack["id"] != null)
+                    {
+                        exitosoCrearTrack=true;
+                        txtTrackName.setText("")
+                        txtTracDuration.setText("")
+                    }
+
+                    listAlbum=  NetworkServiceAdapter.getInstance(application).getAlbums()
+                    ConfigurarComboAlbumes(listAlbum!!,true)
+                }
+
+                if(exitosoCrearTrack)
+                {
+                    Toast.makeText(this@CreateTrack,"**Track agregado con éxito **",Toast.LENGTH_LONG).show()
+                }
+
+
+
         }
+    }
+
+     ///endregion
 
     }
 
-    fun ConfigurarComboAlbumes(listAlbumes: List<Album>){
+    fun ConfigurarComboAlbumes(listAlbumes: List<Album>, SeleccionarItemSpinner:Boolean){
         Thread(Runnable {
         Log.d("function","ff")
         Log.d("function1","ff1")
@@ -128,27 +166,28 @@ class CreateTrack : AppCompatActivity() {
         val listAlbumes2: List<Album> = listAlbumes
         val adaptadorDataSpinner:ArrayAdapter<Album> =ArrayAdapter<Album>(this,android.R.layout.simple_spinner_item,listAlbumes)
         adaptadorDataSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        Log.d("Xfunction1","Xff1X")
 
-            this@CreateTrack.runOnUiThread(java.lang.Runnable {
 
+          this@CreateTrack.runOnUiThread(java.lang.Runnable {
         val spinner=this.findViewById<Spinner>(R.id.album_spinner)
         val textTrackAlbum=this.findViewById<TextView>(R.id.text_tracks_album)
-        Log.d("X2function1","Xff1X2")
+        //val imageViewCoverAlbum=this.findViewById<TextView>(R.id.album_cover_imageDetail)
 
         spinner.adapter=adaptadorDataSpinner
                 spinner.onItemSelectedListener=object :
                     AdapterView.OnItemSelectedListener{
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
-                      //region configuracion trackAlbum
 
-                            textTrackAlbum.setText(listAlbumes2[position].tracks)
+                     //   Glide.with(this@CreateTrack).load(listAlbumes2[position].cover).into(imageViewCoverAlbum)
+                        //region configuracion trackAlbum
+
+                        textTrackAlbum.setText(listAlbumes2[position].tracks)
                         albumSeleccionado=listAlbumes2[position]
 
                         //endregion
 
-                       Toast.makeText(this@CreateTrack,listAlbumes2[position].tracks.toString(),Toast.LENGTH_LONG).show()
+                       //Toast.makeText(this@CreateTrack,listAlbumes2[position].tracks.toString(),Toast.LENGTH_LONG).show()
                        // Toast.makeText(this@CreateTrack,listAlbumes2[position].tracks.toString(),Toast.LENGTH_LONG).show()
                     }
 
@@ -156,6 +195,15 @@ class CreateTrack : AppCompatActivity() {
                         TODO("Not yet implemented")
                     }
                 }
+              //Configura en el spiner el albumseleccionado nuevamente pero con la data actualizada
+              if(SeleccionarItemSpinner)
+              {
+                  val albumsel:Album=listAlbumes!!.filter { it.albumId==albumSeleccionado.albumId}.get(0)
+                  val spinnerPosition: Int = adaptadorDataSpinner.getPosition(albumsel)
+                  spinner.setSelection(spinnerPosition)
+
+              }
+
             })
         Log.d("X3function1","Xff1X3")
     }).start()

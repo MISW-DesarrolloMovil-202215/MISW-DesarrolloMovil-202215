@@ -17,6 +17,9 @@
             android:layout_height="150dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/crearalbum">
+
+
+
         </RelativeLayout>
 
 
@@ -70,7 +73,7 @@
             android:id="@+id/trackDuration_text_input"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:hint="  Nombre"
+            android:hint="  Duración ej.(3:55,15:50,99:59 )"
             android:textSize="15dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_fondo_btn"
