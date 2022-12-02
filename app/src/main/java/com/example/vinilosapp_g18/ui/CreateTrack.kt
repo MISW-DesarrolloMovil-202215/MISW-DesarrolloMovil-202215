@@ -5,69 +5,42 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.vinilosapp_g18.models.Album
 import com.example.vinilosapp_g18.network.NetworkServiceAdapter
-import com.example.vinilosapp_g18.ui.ListAlbumes
 import com.example.vinilosapp_g18.viewmodels.AlbumViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
-import kotlin.coroutines.resume
 import kotlinx.coroutines.*
 import org.json.JSONObject
-import kotlin.coroutines.*
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.encodeToString
-import org.json.JSONStringer
 
 
 class CreateTrack : AppCompatActivity() {
     private val scope = CoroutineScope(newSingleThreadContext("name"))
     private lateinit var viewModel: AlbumViewModel
-   lateinit var  albumSeleccionado:Album
+    lateinit var  albumSeleccionado:Album
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_track)
-
-
-
-
         var listAlbum: List<Album>? = null
-
         GlobalScope.launch {
             listAlbum=  NetworkServiceAdapter.getInstance(application).getAlbums()
             val o=1+1
             if(listAlbum != null)
             {
-                val ourCoroutineContext = ThreadLocal<CoroutineContext>()
-                val listNameAlbum= listAlbum!!.map { it.name }
-                val listIdsAlbum= listAlbum!!.map { it.albumId }
-
                 Log.d("jsonAlbunes","tiene algo")
                 Log.d("jsonAlbunes2",listAlbum!!.count().toString())
-                Log.d("listNameAlbum",listNameAlbum!!.count().toString())
-
-
 
                 ConfigurarComboAlbumes(listAlbum!!,false)
-
-
-
             }
             else
             {
                 Log.d("jsonAlbunes","null")
             }
 
-
-
-    }
-
-
+        }
 
         ///region Configuracion Boton Crear Tranck
         var exitosoCrearTrack:Boolean=false
@@ -117,12 +90,6 @@ class CreateTrack : AppCompatActivity() {
             }
             else
             {
-
-                val msg:String= trackDuration + "-"+trackName +"-"+ albumId.toString()+"-" +albumNamew +"sel:"+ albumSeleccionado.albumId.toString()
-
-                //Toast.makeText(this@CreateTrack,msg,Toast.LENGTH_LONG).show()
-
-
                 GlobalScope.launch {
                     val trackAlbum = JSONObject();
                     trackAlbum.put("name", trackName)
@@ -172,22 +139,15 @@ class CreateTrack : AppCompatActivity() {
         val textTrackAlbum=this.findViewById<TextView>(R.id.text_tracks_album)
         val imageViewCoverAlbum=this.findViewById<ImageView>(R.id.coverAlbumTrack_ImageView)
 
+
         spinner.adapter=adaptadorDataSpinner
                 spinner.onItemSelectedListener=object :
                     AdapterView.OnItemSelectedListener{
-                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
-
-                    Glide.with(this@CreateTrack).load(listAlbumes2[position].cover).into(imageViewCoverAlbum)
-                        //region configuracion trackAlbum
-
+                        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        Glide.with(this@CreateTrack).load(listAlbumes2[position].cover).into(imageViewCoverAlbum)
                         textTrackAlbum.setText(listAlbumes2[position].tracks)
                         albumSeleccionado=listAlbumes2[position]
 
-                        //endregion
-
-                       //Toast.makeText(this@CreateTrack,listAlbumes2[position].tracks.toString(),Toast.LENGTH_LONG).show()
-                       // Toast.makeText(this@CreateTrack,listAlbumes2[position].tracks.toString(),Toast.LENGTH_LONG).show()
                     }
 
                     override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -204,14 +164,8 @@ class CreateTrack : AppCompatActivity() {
               }
 
             })
-        Log.d("X3function1","Xff1X3")
     }).start()
     }
 
-   suspend fun ff1(){
 
-        Log.d("function1","ff1")
-       val lista= listOf<String>("","","","")
-        val adaptadorDataSpinner=ArrayAdapter(this,android.R.layout.simple_spinner_item,lista)
-    }
 }

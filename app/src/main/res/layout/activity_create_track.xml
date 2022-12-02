@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
@@ -24,7 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                app:srcCompat="@drawable/abajo"/>
+                app:srcCompat="@drawable/loading_animation"
+               />
         </RelativeLayout>
 
 
