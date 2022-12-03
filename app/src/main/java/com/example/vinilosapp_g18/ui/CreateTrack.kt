@@ -1,5 +1,6 @@
 package com.example.vinilosapp_g18
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.widget.*
 import com.bumptech.glide.Glide
 import com.example.vinilosapp_g18.models.Album
 import com.example.vinilosapp_g18.network.NetworkServiceAdapter
+import com.example.vinilosapp_g18.ui.ListAlbumes
 import com.example.vinilosapp_g18.viewmodels.AlbumViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
@@ -165,5 +167,9 @@ class CreateTrack : AppCompatActivity() {
     }).start()
     }
 
-
+    override fun onBackPressed() {
+        intent = Intent(this, ListAlbumes::class.java)
+        startActivity(intent)
+        finish()
+    }
 }

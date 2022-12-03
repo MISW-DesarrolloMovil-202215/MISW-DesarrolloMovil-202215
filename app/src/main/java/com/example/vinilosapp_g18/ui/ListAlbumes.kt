@@ -33,7 +33,7 @@ class ListAlbumes : AppCompatActivity() {
 
 
 
-        val btnCreateTrack = findViewById<Button>(R.id.btnCreateAlbum)
+        val btnCreateTrack = findViewById<Button>(R.id.btnCreateTrack)
         btnCreateTrack.setOnClickListener {
             val intent = Intent(this, CreateTrack::class.java)
             startActivity(intent)
