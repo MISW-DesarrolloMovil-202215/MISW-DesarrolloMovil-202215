@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            >
+
+
+            <ImageView
+                android:id="@+id/coverAlbumTrack_ImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                app:srcCompat="@drawable/loading_animation"
+               />
+        </RelativeLayout>
+
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:text="Crear Track" />
+
+        <TextView
+            android:id="@+id/textAlbumLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#808080"
+            android:textStyle="bold"
+            android:hint="Album:" />
+
+        <Spinner
+            android:id="@+id/album_spinner"
+            android:layout_width="match_parent"
+            android:textSize="15dp"
+            android:text="Album"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_spinnerbtn"
+            android:textColor="#808080"
+            android:textStyle="bold"
+            android:layout_height="45dp" />
+
+
+        <EditText
+            android:id="@+id/trackName_text_input"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Nombre"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_fondo_btn"
+            android:textColor="#808080"
+            android:textStyle="bold"
+            android:inputType="text"
+            android:paddingHorizontal="16dp"/>
+
+
+        <EditText
+            android:id="@+id/trackDuration_text_input"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Duración ej.(3:55,15:50,99:59 )"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_fondo_btn"
+            android:textColor="#808080"
+            android:textStyle="bold"
+            android:inputType="text"
+            android:paddingHorizontal="16dp"
+            />
+
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_newAlbum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_fondo"
+            android:text="Crear Track"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:text="Tracks:" />
+        <TextView
+            android:id="@+id/text_tracks_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="13dp"
+            android:text="-" />
+
+
+
+    </LinearLayout>
+</LinearLayout>

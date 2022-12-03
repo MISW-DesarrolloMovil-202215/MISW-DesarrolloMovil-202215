@@ -45,8 +45,6 @@ class CreateAlbum : AppCompatActivity() {
 
         val dateEdt = findViewById<EditText>(R.id.idEdtDate)
 
-        // on below line we are adding
-        // click listener for our edit text.
         dateEdt.setOnClickListener {
 
             // on below line we are getting

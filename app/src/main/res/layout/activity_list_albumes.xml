@@ -29,6 +29,31 @@
             android:textSize="8dp"
             android:layout_marginTop="35dp"
             android:textColor="#ffffff"></Button>
+
+
+
+
+        <ImageButton
+            android:id="@+id/btnImgCreateTrack"
+            android:layout_width="99dp"
+
+            android:layout_height="63dp"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="263dp"
+            android:src="@drawable/album_nuevo"></ImageButton>
+        <Button
+            android:id="@+id/btnCreateTrack"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="263dp"
+            android:layout_height="wrap_content"
+            android:text="Crear Track"
+            android:textSize="8dp"
+            android:layout_marginTop="35dp"
+            android:textColor="#ffffff"></Button>
+
+
+
+
     </RelativeLayout>
 
     <androidx.fragment.app.FragmentContainerView
@@ -41,5 +66,9 @@
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
         app:navGraph="@navigation/nav_graph_albumes"
         tools:layout_editor_absoluteX="0dp" />
+
+
+
+
 
 </LinearLayout>

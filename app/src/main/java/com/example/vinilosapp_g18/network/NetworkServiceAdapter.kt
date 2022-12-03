@@ -55,6 +55,13 @@ class NetworkServiceAdapter constructor(context: Context) {
                 var item: JSONObject
                 for (i in 0 until resp.length()) {
                     item = resp.getJSONObject(i)
+                    val arrayTracks: JSONArray = item.getJSONArray("tracks")
+                    tracks=""
+                    for (j in 0 until arrayTracks.length()) {
+
+                        tracks += arrayTracks.getJSONObject(j).getString("name") + "    " + arrayTracks.getJSONObject(j).getString("duration") + "\n"
+
+                    }
                     list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate").split("T").toTypedArray()[0], genre = item.getString("genre"), description = item.getString("description"), tracks = tracks, comments = comments))
                 }
                 cont.resume(list)
@@ -274,6 +281,50 @@ class NetworkServiceAdapter constructor(context: Context) {
                 Log.d("API", strResp)
             }, Response.ErrorListener {Log.d("API", "that didn't work")
                 Exception("Error")
+            }))
+    }
+
+
+   fun postNewTrack(body: JSONObject,idAlbum:String){
+        requestQueue.add(postRequest("albums/"+idAlbum+"/tracks",
+            body,
+            Response.Listener<JSONObject> { response ->
+                var strResp = response.toString()
+                Log.d("API", strResp)
+                return@Listener
+
+            }, Response.ErrorListener {Log.d("API", "that didn't work")
+                Exception("Error")
+            }))
+    }
+
+    fun get_AllAlbums():String{
+        getAllAlbums()
+        Log.d("glbJsonStrAlbum",glbJsonStrAlbum)
+        return glbJsonStrAlbum
+
+    }
+
+
+
+    suspend fun postTrackToAlbum(body: JSONObject,idAlbum:String)=suspendCoroutine<JSONObject>{cont->
+        requestQueue.add(postRequest("albums/"+idAlbum+"/tracks",
+            body,
+            Response.Listener<JSONObject> { response ->
+
+                // val resp = JSONArray(response)
+                //val list = mutableListOf<Artist>()
+                //var item: JSONObject
+                //for (i in 0 until resp.length()) {
+                //  item = resp.getJSONObject(i)
+                // list.add(i, Artist(artistId = item.getInt("id"),name = item.getString("name"), image = item.getString("image"), birthDate = item.getString("birthDate").split("T").toTypedArray()[0], description = item.getString("description"), albumes = "", prizes = ""))
+
+                //}
+                Log.d("APIPOSTTRAC",response.toString())
+                cont.resume(response)
+            },
+            Response.ErrorListener {
+                cont.resumeWithException(it)
             }))
     }
 
