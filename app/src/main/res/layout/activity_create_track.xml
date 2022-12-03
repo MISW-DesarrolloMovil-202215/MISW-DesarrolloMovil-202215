@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
+                android:contentDescription='Encabezado'
                 app:srcCompat="@drawable/loading_animation"
                />
         </RelativeLayout>
@@ -48,7 +49,7 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:layout_marginTop="10dp"
-            android:textColor="#808080"
+            android:textColorHint="#000000"
             android:textStyle="bold"
             android:hint="Album:" />
 
@@ -59,21 +60,22 @@
             android:text="Album"
             android:layout_marginTop="5dp"
             android:background="@drawable/background_spinnerbtn"
-            android:textColor="#808080"
-            android:textStyle="bold"
-            android:layout_height="45dp" />
+            android:textColorHint="#000000"
+            android:textColor="#000000"
+            android:paddingHorizontal="5dp"
+            android:layout_height="49dp" />
 
 
         <EditText
             android:id="@+id/trackName_text_input"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="49dp"
             android:hint="Nombre"
             android:textSize="15dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_fondo_btn"
-            android:textColor="#808080"
-            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
             android:inputType="text"
             android:paddingHorizontal="16dp"/>
 
@@ -81,13 +83,13 @@
         <EditText
             android:id="@+id/trackDuration_text_input"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="49dp"
             android:hint="Duración ej.(3:55,15:50,99:59 )"
             android:textSize="15dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_fondo_btn"
-            android:textColor="#808080"
-            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
             android:inputType="text"
             android:paddingHorizontal="16dp"
             />
@@ -97,7 +99,7 @@
             android:layout_marginTop="10dp"
             android:id="@+id/btn_newAlbum"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="49dp"
             android:background="@drawable/background_fondo"
             android:text="Crear Track"/>
 
