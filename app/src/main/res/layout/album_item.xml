@@ -75,7 +75,7 @@
                             android:layout_height="wrap_content"
                             android:paddingTop="3dp"
                             android:textSize="15sp"
-                            android:textColor="#808080"
+                            android:textColor="#000000"
                             android:text="Fecha: "/>
                         <TextView
                             android:id="@+id/text_releaseDate"
@@ -84,7 +84,7 @@
                             android:paddingTop="3dp"
                             android:layout_marginStart="53dp"
                             android:textSize="15sp"
-                            android:textColor="#808080"
+                            android:textColor="#000000"
                             android:text="@{album.releaseDate}"/>
                     </RelativeLayout>
                 </LinearLayout>
@@ -102,7 +102,8 @@
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    app:image="@{album.cover}"/>
+                    app:image="@{album.cover}"
+                    android:contentDescription='@{album.name}'/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

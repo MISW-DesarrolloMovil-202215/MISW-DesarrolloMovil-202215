@@ -19,7 +19,8 @@
             android:layout_centerHorizontal="true"
             android:layout_height="63dp"
             android:scaleType="fitXY"
-            android:src="@drawable/album_nuevo"></ImageButton>
+            android:src="@drawable/album_nuevo"
+            android:contentDescription='Crear Album'></ImageButton>
         <Button
             android:id="@+id/btnCreateAlbum"
             android:layout_width="wrap_content"
@@ -40,7 +41,8 @@
             android:layout_height="63dp"
             android:scaleType="fitXY"
             android:layout_marginLeft="263dp"
-            android:src="@drawable/album_nuevo"></ImageButton>
+            android:src="@drawable/album_nuevo"
+            android:contentDescription='Crear Track'></ImageButton>
         <Button
             android:id="@+id/btnCreateTrack"
             android:layout_width="wrap_content"
