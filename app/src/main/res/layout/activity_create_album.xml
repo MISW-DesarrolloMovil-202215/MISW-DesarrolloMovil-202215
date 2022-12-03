@@ -110,6 +110,7 @@
         android:id="@+id/albumGenre_spinner"
         android:layout_width="match_parent"
         android:textSize="15dp"
+        android:labelFor="@+id/textAlbumGenre"
         android:text="  Descripción"
         android:layout_marginTop="5dp"
         android:background="@drawable/background_spinnerbtn"
@@ -133,6 +134,7 @@
         android:layout_width="match_parent"
         android:textSize="15dp"
         android:text="Descripción"
+        android:labelFor="@+id/textAlbumRecordLabel"
         android:layout_marginTop="5dp"
         android:background="@drawable/background_spinnerbtn"
         android:textColor="#000000"
@@ -145,6 +147,7 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:background="@drawable/background_fondo"
-        android:text="Crear Album"/>
+        android:text="Crear Album"
+        android:contentDescription='Finalizar y Crear Album'/>
     </LinearLayout>
 </LinearLayout>

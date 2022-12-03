@@ -56,6 +56,7 @@
             android:layout_width="match_parent"
             android:textSize="15dp"
             android:text="Album"
+            android:labelFor="@+id/textAlbumLabel"
             android:layout_marginTop="5dp"
             android:background="@drawable/background_spinnerbtn"
             android:textColorHint="#000000"
@@ -99,7 +100,8 @@
             android:layout_width="match_parent"
             android:layout_height="49dp"
             android:background="@drawable/background_fondo"
-            android:text="Crear Track"/>
+            android:text="Crear Track"
+            android:contentDescription='Finalizar y Crear Track'/>
 
         <TextView
             android:layout_width="wrap_content"

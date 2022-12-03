@@ -20,7 +20,7 @@
             android:layout_height="63dp"
             android:scaleType="fitXY"
             android:src="@drawable/album_nuevo"
-            android:contentDescription='Crear Album'></ImageButton>
+            android:contentDescription='Enlace para Crear Album'></ImageButton>
         <Button
             android:id="@+id/btnCreateAlbum"
             android:layout_width="wrap_content"
@@ -29,7 +29,8 @@
             android:text="Crear Album"
             android:textSize="8dp"
             android:layout_marginTop="35dp"
-            android:textColor="#ffffff"></Button>
+            android:textColor="#ffffff"
+            android:contentDescription='Redirije a Crear Album'></Button>
 
 
 
@@ -42,7 +43,7 @@
             android:scaleType="fitXY"
             android:layout_marginLeft="263dp"
             android:src="@drawable/album_nuevo"
-            android:contentDescription='Crear Track'></ImageButton>
+            android:contentDescription='Enlace para Crear Track'></ImageButton>
         <Button
             android:id="@+id/btnCreateTrack"
             android:layout_width="wrap_content"
@@ -51,7 +52,8 @@
             android:text="Crear Track"
             android:textSize="8dp"
             android:layout_marginTop="35dp"
-            android:textColor="#ffffff"></Button>
+            android:textColor="#ffffff"
+            android:contentDescription='Redirije a Crear Track'></Button>
 
 
 
