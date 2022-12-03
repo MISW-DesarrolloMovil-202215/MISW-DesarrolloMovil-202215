@@ -27,7 +27,6 @@ class CreateTrack : AppCompatActivity() {
         var listAlbum: List<Album>? = null
         GlobalScope.launch {
             listAlbum=  NetworkServiceAdapter.getInstance(application).getAlbums()
-            val o=1+1
             if(listAlbum != null)
             {
                 Log.d("jsonAlbunes","tiene algo")
@@ -160,10 +159,9 @@ class CreateTrack : AppCompatActivity() {
                   val albumsel:Album=listAlbumes!!.filter { it.albumId==albumSeleccionado.albumId}.get(0)
                   val spinnerPosition: Int = adaptadorDataSpinner.getPosition(albumsel)
                   spinner.setSelection(spinnerPosition)
-
               }
 
-            })
+        })
     }).start()
     }
 
