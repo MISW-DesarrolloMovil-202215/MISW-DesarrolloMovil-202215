@@ -33,6 +33,7 @@ class HU06_DetalleColeccionista_Esc1 {
 
     @Test
     fun hU06_DetalleColeccionista_Esc1() {
+        Thread.sleep(2000)
         val textView = onView(
             allOf(
                 withText("Vinilos"),

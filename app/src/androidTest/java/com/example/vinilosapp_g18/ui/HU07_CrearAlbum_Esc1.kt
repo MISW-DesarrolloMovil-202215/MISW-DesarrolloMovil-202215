@@ -20,6 +20,7 @@ import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.concurrent.thread
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -291,7 +292,15 @@ class HU07_CrearAlbum_Esc1 {
             )
         )
         materialButton3.perform(click())
+        Thread.sleep(3000)
+        val albumListView = onView(
+            allOf(
+                withId(R.id.albumsRv)
+            )
+        )
 
+        Thread.sleep(2000)
+        albumListView.check(matches((isDisplayed())))
 
     }
 
