@@ -3,6 +3,7 @@ package com.example.vinilosapp_g18.ui
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
@@ -13,8 +14,7 @@ import androidx.test.filters.LargeTest
 import com.example.vinilosapp_g18.R
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers.`is`
-import org.hamcrest.Matchers.allOf
+import org.hamcrest.Matchers.*
 import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
@@ -23,14 +23,18 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class HU07_CrearAlbum_Esc2 {
+class HU08_AsociarTracksAlbumTest_Esc2 {
+    var testAlbum = "Test Album"+(0..1000000).random().toString()
+    var testTrack:CustonTrack=
+        CustonTrack(testAlbum,"TrackPol_"+(0..100).random().toString(),(2..4).random().toString()+":"+  (10..59).random().toString())
 
     @Rule
     @JvmField
     var mActivityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun testingHU07() {
+    fun hU08_AsociarTracksAlbumTest_Esc2() {
+
         val textView = onView(
             allOf(
                 withText("Vinilos"),
@@ -95,7 +99,7 @@ class HU07_CrearAlbum_Esc2 {
         )
         imageButton2.check(matches(isDisplayed()))
 
-        val appCompatImageButton = onView(
+        val appCompatImageButtonh = onView(
             allOf(
                 withId(R.id.albumes),
                 childAtPosition(
@@ -108,7 +112,8 @@ class HU07_CrearAlbum_Esc2 {
                 isDisplayed()
             )
         )
-        appCompatImageButton.perform(click())
+        appCompatImageButtonh.perform(click())
+        Thread.sleep(1500)
 
         val materialButton = onView(
             allOf(
@@ -124,6 +129,7 @@ class HU07_CrearAlbum_Esc2 {
             )
         )
         materialButton.perform(click())
+        Thread.sleep(1500)
 
         val appCompatEditText = onView(
             allOf(
@@ -138,7 +144,7 @@ class HU07_CrearAlbum_Esc2 {
                 isDisplayed()
             )
         )
-        appCompatEditText.perform(replaceText("Album test 1"), closeSoftKeyboard())
+        appCompatEditText.perform(replaceText(testTrack.nameAlbum), closeSoftKeyboard())
 
         val appCompatEditText2 = onView(
             allOf(
@@ -154,6 +160,7 @@ class HU07_CrearAlbum_Esc2 {
             )
         )
         appCompatEditText2.perform(click())
+        Thread.sleep(1500)
 
         val materialButton2 = onView(
             allOf(
@@ -168,6 +175,7 @@ class HU07_CrearAlbum_Esc2 {
             )
         )
         materialButton2.perform(scrollTo(), click())
+        Thread.sleep(1500)
 
         val appCompatEditText3 = onView(
             allOf(
@@ -183,6 +191,7 @@ class HU07_CrearAlbum_Esc2 {
             )
         )
         appCompatEditText3.perform(click())
+        Thread.sleep(1500)
 
         val appCompatEditText4 = onView(
             allOf(
@@ -198,6 +207,7 @@ class HU07_CrearAlbum_Esc2 {
             )
         )
         appCompatEditText4.perform(click())
+        Thread.sleep(1500)
 
         val appCompatEditText5 = onView(
             allOf(
@@ -213,6 +223,7 @@ class HU07_CrearAlbum_Esc2 {
             )
         )
         appCompatEditText5.perform(click())
+        Thread.sleep(1500)
 
         val appCompatEditText6 = onView(
             allOf(
@@ -228,6 +239,7 @@ class HU07_CrearAlbum_Esc2 {
             )
         )
         appCompatEditText6.perform(click())
+        Thread.sleep(1500)
 
         val appCompatEditText7 = onView(
             allOf(
@@ -243,6 +255,7 @@ class HU07_CrearAlbum_Esc2 {
             )
         )
         appCompatEditText7.perform(click())
+        Thread.sleep(1500)
 
         val appCompatEditText8 = onView(
             allOf(
@@ -258,7 +271,7 @@ class HU07_CrearAlbum_Esc2 {
             )
         )
         appCompatEditText8.perform(
-            replaceText(""),
+            replaceText("https://random.imagecdn.app/400/400"),
             closeSoftKeyboard()
         )
 
@@ -290,10 +303,96 @@ class HU07_CrearAlbum_Esc2 {
                 isDisplayed()
             )
         )
+        Thread.sleep(2000)
         materialButton3.perform(click())
-        Thread.sleep(3000)
-        materialButton3.check(matches(isDisplayed()))
+        Thread.sleep(1500)
+        val albumListView = onView(
+            allOf(
+                withId(R.id.albumsRv)
+            )
+        )
 
+        Thread.sleep(2000)
+        albumListView.check(matches((isDisplayed())))
+
+        val appCompatImageButton2 = onView(
+            allOf(
+                withId(R.id.btnImgCreateTrack),
+                childAtPosition(
+                    childAtPosition(
+                        withClassName(`is`("android.widget.LinearLayout")),
+                        0
+                    ),
+                    2
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatImageButton2.perform(click())
+        Thread.sleep(1500)
+
+        val appCompatSpinner = onView(
+            allOf(
+                withId(R.id.album_spinner),
+                childAtPosition(
+                    childAtPosition(
+                        withClassName(`is`("android.widget.LinearLayout")),
+                        0
+                    ),
+                    3
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatSpinner.perform(click())
+        Thread.sleep(1500)
+
+        val spinnerText = onData(hasToString(testTrack.nameAlbum))
+        spinnerText.perform(click())
+        Thread.sleep(1500)
+
+        //AGREGA NOMBRE
+        val trackName = onView(
+            withId(R.id.trackName_text_input)
+        )
+        trackName.perform(replaceText(""), closeSoftKeyboard())
+        Thread.sleep(1500)
+
+            //AGREGA DURACION
+        val trackDuration = onView(
+            withId(R.id.trackDuration_text_input)
+        )
+        trackDuration.perform(replaceText(testTrack.durationTrack), closeSoftKeyboard())
+        Thread.sleep(1500)
+
+
+
+        val createTrack = onView(
+            allOf(
+                withId(R.id.btn_newAlbum), withText("Crear Track"),
+                childAtPosition(
+                    childAtPosition(
+                        withClassName(`is`("android.widget.LinearLayout")),
+                        0
+                    ),
+                    6
+                ),
+                isDisplayed()
+            )
+        )
+        createTrack.perform(click())
+        Thread.sleep(3000)
+
+        val textViewh = onView(
+            allOf(
+                withId(R.id.text_tracks_album),
+                withText(containsString("")),
+                withParent(withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java))),
+                isDisplayed()
+            )
+        )
+        textViewh.check(matches(isDisplayed()))
+        Thread.sleep(2000)
     }
 
     private fun childAtPosition(
