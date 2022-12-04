@@ -24,7 +24,7 @@ import org.junit.runner.RunWith
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class HU08_AsociarTracksAlbumTest_Esc2 {
-    var testAlbum = "Test Album"+(0..1000000).random().toString()
+    var testAlbum = "Test Album"+(0..10000000).random().toString()
     var testTrack:CustonTrack=
         CustonTrack(testAlbum,"TrackPol_"+(0..100).random().toString(),(2..4).random().toString()+":"+  (10..59).random().toString())
 
