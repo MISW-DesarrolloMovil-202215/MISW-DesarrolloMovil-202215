@@ -271,7 +271,7 @@ class HU08_AsociarTracksAlbumTest_Esc2 {
             )
         )
         appCompatEditText8.perform(
-            replaceText("https://random.imagecdn.app/400/400"+(0..50).random().toString()),
+            replaceText("https://random.imagecdn.app/400/400"),
             closeSoftKeyboard()
         )
 
