@@ -18,6 +18,7 @@ Kotlin
 ## En el build.gradle (app)
 Para asegurar que la aplicación pueda ejecutarse de manera correcta, la versiones utilizadas en las dependencias fueron:
 
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -62,17 +63,15 @@ Finalmente, podrá ejecutar todas las pruebas del mismo modo en que corre la apl
 ## APK
 Descomprimir e instalar.
 
-[V1.2.0](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/files/10150531/VinilosAppV1.2.0.zip)
+[v1.2.0](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/files/10150531/VinilosAppV1.2.0.zip)
 
-v1.1.0
-[VinilosAppV1.1.0.zip](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/files/10053191/VinilosAppV1.1.0.zip)
+[v1.1.0](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/files/10053191/VinilosAppV1.1.0.zip)
 
-v1.0.0
-[VinilosApp.zip](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/files/9948271/VinilosApp.zip)
+[v1.0.0](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/files/9948271/VinilosApp.zip)
 
 ## Releases
 
-[V1.2.0] (https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/releases/tag/v1.2.0)
+[V1.2.0](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/releases/tag/v1.2.0)
 
 [V1.1.0](https://github.com/MISW-DesarrolloMovil-202215/MISW-DesarrolloMovil-202215/releases/tag/v1.1.0)
 
