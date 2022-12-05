@@ -101,13 +101,13 @@ class CreateAlbum : AppCompatActivity() {
                 val albumCover = findViewById<EditText>(R.id.albumCover_text_input).text
                 val albumReleaseDate = findViewById<EditText>(R.id.idEdtDate).text
                 val albumDescription = findViewById<EditText>(R.id.albumDescripcion_text_input).text
-                val albumGenre = genresSpinner.getSelectedItem().toString()
-                val albumRecordLabel =  recordLabelSpinner.getSelectedItem().toString()
+                val albumGenre = genresSpinner.selectedItem.toString()
+                val albumRecordLabel =  recordLabelSpinner.selectedItem.toString()
                 if(albumName.isEmpty() || albumCover.isEmpty() || albumReleaseDate.isEmpty() || albumDescription.isEmpty() || albumGenre.isEmpty() || albumRecordLabel.isEmpty()) {
                     Toast.makeText(this@CreateAlbum, "Se deben completar todos los campos para crear un albúm!", Toast.LENGTH_SHORT).show()
                 } else {
                     if (URLUtil.isValidUrl(albumCover.toString())) {
-                        val album = JSONObject();
+                        val album = JSONObject()
                         album.put("name", albumName)
                         album.put("cover", albumCover)
                         album.put("releaseDate", albumReleaseDate)

@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="#eeeeee"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.ColeccionistaFragment">
+    tools:context=".ui.ColeccionistaFragment"
+    tools:ignore="Overdraw">
 
     <!-- TODO: Update blank fragment layout -->
 <ProgressBar

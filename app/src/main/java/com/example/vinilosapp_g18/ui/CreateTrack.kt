@@ -34,7 +34,7 @@ class CreateTrack : AppCompatActivity() {
                 Log.d("jsonAlbunes","tiene algo")
                 Log.d("jsonAlbunes2",listAlbum!!.count().toString())
 
-                ConfigurarComboAlbumes(listAlbum!!,false)
+                ConfigurarComboAlbumes(listAlbum!!,false,null)
             }
             else
             {
@@ -92,34 +92,21 @@ class CreateTrack : AppCompatActivity() {
             else
             {
                 GlobalScope.launch {
-                    val trackAlbum = JSONObject();
+                    val trackAlbum = JSONObject()
                     trackAlbum.put("name", trackName)
                     trackAlbum.put("duration", trackDuration)
 
-                    Log.d("Antes Button POST BODY", trackAlbum["name"].toString())
-                    Log.d("albumSelecc.albumId",albumSeleccionado.albumId.toString())
                     var returnNewTrack=  NetworkServiceAdapter.getInstance(application).postTrackToAlbum(trackAlbum,albumSeleccionado.albumId.toString())
-                    Log.d("Despues Button POST","Despues Button")
 
                     Log.d("Idtrack",returnNewTrack["id"].toString())
                     if(returnNewTrack != null && returnNewTrack["id"] != null)
                     {
-                        exitosoCrearTrack=true;
-                        txtTrackName.setText("")
-                        txtTracDuration.setText("")
+                        exitosoCrearTrack=true
                     }
-
                     listAlbum=  NetworkServiceAdapter.getInstance(application).getAlbums()
-                    ConfigurarComboAlbumes(listAlbum!!,true)
+                    ConfigurarComboAlbumes(listAlbum!!,true,exitosoCrearTrack)
+
                 }
-
-                if(exitosoCrearTrack)
-                {
-                    Toast.makeText(this@CreateTrack,"**Track agregado con éxito **",Toast.LENGTH_LONG).show()
-                }
-
-
-
         }
     }
 
@@ -127,44 +114,58 @@ class CreateTrack : AppCompatActivity() {
 
     }
 
-    fun ConfigurarComboAlbumes(listAlbumes: List<Album>, SeleccionarItemSpinner:Boolean){
+    fun ConfigurarComboAlbumes(listAlbumes: List<Album>, SeleccionarItemSpinner:Boolean,exitosoCrearTrack:Boolean?){
+
         Thread(Runnable {
 
-        val listAlbumes2: List<Album> = listAlbumes
-        val adaptadorDataSpinner:ArrayAdapter<Album> =ArrayAdapter<Album>(this,android.R.layout.simple_spinner_item,listAlbumes)
-        adaptadorDataSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            val listAlbumes2: List<Album> = listAlbumes
+            val adaptadorDataSpinner:ArrayAdapter<Album> =ArrayAdapter<Album>(this,android.R.layout.simple_spinner_item,listAlbumes)
+            adaptadorDataSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
 
-        this@CreateTrack.runOnUiThread(java.lang.Runnable {
-        val spinner=this.findViewById<Spinner>(R.id.album_spinner)
-        val textTrackAlbum=this.findViewById<TextView>(R.id.text_tracks_album)
-        val imageViewCoverAlbum=this.findViewById<ImageView>(R.id.coverAlbumTrack_ImageView)
+            this@CreateTrack.runOnUiThread(java.lang.Runnable {
+            val spinner=this.findViewById<Spinner>(R.id.album_spinner)
+            val textTrackAlbum=this.findViewById<TextView>(R.id.text_tracks_album)
+            val imageViewCoverAlbum=this.findViewById<ImageView>(R.id.coverAlbumTrack_ImageView)
+
+            if(exitosoCrearTrack==true)
+            {
+                val txtTrackName=findViewById<EditText>(R.id.trackName_text_input)
+                val txtTracDuration=findViewById<EditText>(R.id.trackDuration_text_input)
+                Toast.makeText(this@CreateTrack,"**Track agregado con éxito **",Toast.LENGTH_LONG).show()
+                txtTrackName.setText("")
+                txtTracDuration.setText("")
+
+            }else if(exitosoCrearTrack==false)
+            {
+                Toast.makeText(this@CreateTrack,"**Error al crear el track**",Toast.LENGTH_LONG).show()
+            }
 
 
-        spinner.adapter=adaptadorDataSpinner
-                spinner.onItemSelectedListener=object :
-                    AdapterView.OnItemSelectedListener{
-                        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                        Glide.with(this@CreateTrack).load(listAlbumes2[position].cover).into(imageViewCoverAlbum)
-                        textTrackAlbum.setText(listAlbumes2[position].tracks)
-                        albumSeleccionado=listAlbumes2[position]
+            spinner.adapter=adaptadorDataSpinner
+                    spinner.onItemSelectedListener=object :
+                        AdapterView.OnItemSelectedListener{
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                            Glide.with(this@CreateTrack).load(listAlbumes2[position].cover).into(imageViewCoverAlbum)
+                                textTrackAlbum.text = listAlbumes2[position].tracks
+                            albumSeleccionado=listAlbumes2[position]
 
+                        }
+
+                        override fun onNothingSelected(p0: AdapterView<*>?) {
+                            TODO("Not yet implemented")
+                        }
                     }
+                  //Configura en el spiner el albumseleccionado nuevamente pero con la data actualizada
+                  if(SeleccionarItemSpinner)
+                  {
+                      val albumsel:Album= listAlbumes.filter { it.albumId==albumSeleccionado.albumId}.get(0)
+                      val spinnerPosition: Int = adaptadorDataSpinner.getPosition(albumsel)
+                      spinner.setSelection(spinnerPosition)
+                  }
 
-                    override fun onNothingSelected(p0: AdapterView<*>?) {
-                        TODO("Not yet implemented")
-                    }
-                }
-              //Configura en el spiner el albumseleccionado nuevamente pero con la data actualizada
-              if(SeleccionarItemSpinner)
-              {
-                  val albumsel:Album=listAlbumes!!.filter { it.albumId==albumSeleccionado.albumId}.get(0)
-                  val spinnerPosition: Int = adaptadorDataSpinner.getPosition(albumsel)
-                  spinner.setSelection(spinnerPosition)
-              }
-
-        })
-    }).start()
+            })
+        }).start()
     }
 
     override fun onBackPressed() {
