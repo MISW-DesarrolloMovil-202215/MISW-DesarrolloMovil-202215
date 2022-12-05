@@ -35,10 +35,11 @@ class HU02_DetalleAlbumesTest_Esc1 {
 
     @Test
     fun detalle_AlbumesTest_Esc1() {
+        Thread.sleep(7000)
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         Assert.assertEquals("com.example.vinilosapp_g18", appContext.packageName)
 
-        Thread.sleep(2000)
+
         val linearLayout = onView(
             allOf(
                 withId(R.id.hometext),
@@ -98,7 +99,7 @@ class HU02_DetalleAlbumesTest_Esc1 {
         albumsButton.perform(click())
 
 
-        Thread.sleep(2000)
+        Thread.sleep(3000)
         val recyclerView = onView(
             allOf(
                 withId(R.id.albumsRv)
@@ -106,7 +107,7 @@ class HU02_DetalleAlbumesTest_Esc1 {
         )
 
         recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
-        Thread.sleep(2000)
+        Thread.sleep(3000)
 
         val albumName = onView(
             allOf(
@@ -116,7 +117,7 @@ class HU02_DetalleAlbumesTest_Esc1 {
         )
         albumName.check(matches(isDisplayed()))
 
-        Thread.sleep(2000)
+        Thread.sleep(3000)
 
 
     }

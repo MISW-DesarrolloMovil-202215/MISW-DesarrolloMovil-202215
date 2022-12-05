@@ -39,7 +39,7 @@ class HU02_DetalleAlbumesTest_Esc2 {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         Assert.assertEquals("com.example.vinilosapp_g18", appContext.packageName)
 
-        Thread.sleep(2000)
+        Thread.sleep(3000)
         val linearLayout = onView(
             allOf(
                 withId(R.id.hometext),
@@ -99,7 +99,7 @@ class HU02_DetalleAlbumesTest_Esc2 {
         albumsButton.perform(click())
 
 
-        Thread.sleep(2000)
+        Thread.sleep(3000)
         val recyclerView = onView(
             allOf(
                 withId(R.id.albumsRv)
@@ -107,6 +107,7 @@ class HU02_DetalleAlbumesTest_Esc2 {
         )
 
         recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
+        Thread.sleep(3000)
 
         val albumName = onView(
             allOf(
@@ -119,9 +120,9 @@ class HU02_DetalleAlbumesTest_Esc2 {
         for (i in 1..5){
             albumName.check(matches(isDisplayed()))
             Espresso.pressBack()
-            Thread.sleep(2000)
+            Thread.sleep(3000)
             recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
-            Thread.sleep(2000)
+            Thread.sleep(3000)
         }
     }
 

@@ -6,7 +6,59 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="end"
+        android:orientation="vertical">
 
+        <ImageButton
+            android:id="@+id/btnCreateAlbum2"
+            android:layout_width="99dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="63dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/album_nuevo"
+            android:contentDescription='Enlace para Crear Album'></ImageButton>
+        <Button
+            android:id="@+id/btnCreateAlbum"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:text="Crear Album"
+            android:textSize="8dp"
+            android:layout_marginTop="35dp"
+            android:textColor="#ffffff"
+            android:contentDescription='Redirije a Crear Album'></Button>
+
+
+
+
+        <ImageButton
+            android:id="@+id/btnImgCreateTrack"
+            android:layout_width="99dp"
+
+            android:layout_height="63dp"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="263dp"
+            android:src="@drawable/album_nuevo"
+            android:contentDescription='Enlace para Crear Track'></ImageButton>
+        <Button
+            android:id="@+id/btnCreateTrack"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="263dp"
+            android:layout_height="wrap_content"
+            android:text="Crear Track"
+            android:textSize="8dp"
+            android:layout_marginTop="35dp"
+            android:textColor="#ffffff"
+            android:contentDescription='Redirije a Crear Track'></Button>
+
+
+
+
+    </RelativeLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
@@ -18,5 +70,9 @@
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
         app:navGraph="@navigation/nav_graph_albumes"
         tools:layout_editor_absoluteX="0dp" />
+
+
+
+
 
 </LinearLayout>

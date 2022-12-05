@@ -44,7 +44,8 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="0dp"
                         android:scaleType="fitXY"
-                        app:imageDetail="@{artist.image}"></ImageView>
+                        app:imageDetail="@{artist.image}"
+                        android:contentDescription='@{artist.name}'></ImageView>
 
                 </androidx.cardview.widget.CardView>
                 </RelativeLayout>

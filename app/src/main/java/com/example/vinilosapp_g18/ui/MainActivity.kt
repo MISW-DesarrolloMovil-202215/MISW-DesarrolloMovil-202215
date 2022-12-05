@@ -6,18 +6,18 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
-import android.content.Intent;
+import android.content.Intent
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import com.example.vinilosapp_g18.R
 
 class MainActivity : AppCompatActivity() {
-    lateinit var bgapp: ImageView;
-    lateinit var logo: ImageView;
-    lateinit var splashtext: LinearLayout;
-    lateinit var homeText: LinearLayout;
-    lateinit var menu: LinearLayout;
-    lateinit var frombotton: Animation;
+    lateinit var bgapp: ImageView
+    lateinit var logo: ImageView
+    lateinit var splashtext: LinearLayout
+    lateinit var homeText: LinearLayout
+    lateinit var menu: LinearLayout
+    lateinit var frombotton: Animation
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
         splashtext = findViewById(R.id.splashtext)
         homeText = findViewById(R.id.hometext)
         menu = findViewById(R.id.menu)
-        bgapp.animate().translationY(-1250f).setDuration(800).setStartDelay(300);
-        logo.animate().alpha(0f).setDuration(800).setStartDelay(600);
-        splashtext.animate().translationY(140f).alpha(0f).setDuration(800).setStartDelay(300)
+        bgapp.animate().translationY(-1250f).setDuration(800).startDelay = 300
+        logo.animate().alpha(0f).setDuration(800).startDelay = 600
+        splashtext.animate().translationY(140f).alpha(0f).setDuration(800).startDelay = 300
         homeText.startAnimation(frombotton)
         menu.startAnimation(frombotton)
 

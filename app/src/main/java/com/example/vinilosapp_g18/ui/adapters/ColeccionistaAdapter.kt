@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilosapp_g18.R
 import com.example.vinilosapp_g18.databinding.ColeccionistaItemBinding
 import com.example.vinilosapp_g18.models.Coleccionista
+import com.example.vinilosapp_g18.ui.ColeccionistaFragmentDirections
 
 
 class ColeccionistaAdapter : RecyclerView.Adapter<ColeccionistaAdapter.ColeccionistaViewHolder>(){
@@ -38,9 +40,9 @@ class ColeccionistaAdapter : RecyclerView.Adapter<ColeccionistaAdapter.Coleccion
             it.coleccionista= colecionista[position]
         }
         holder.viewDataBinding.root.setOnClickListener {
-           //val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(colecionista[position].coleccionistaId)
-            // Navigate using that action
-            //holder.viewDataBinding.root.findNavController().navigate(action)
+           val action = ColeccionistaFragmentDirections.actionColeccionistaFragmentToColeccionistaDetailFragment(colecionista[position].coleccionistaId)
+           //Navigate using that action
+           holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }
 

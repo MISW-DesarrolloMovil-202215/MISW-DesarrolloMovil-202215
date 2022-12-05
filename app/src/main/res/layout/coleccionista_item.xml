@@ -56,7 +56,7 @@
                             android:layout_height="wrap_content"
                             android:paddingTop="3dp"
                             android:textSize="15sp"
-                            android:textColor="#808080"
+                            android:textColor="#000000"
                             android:text="Teléfono: "/>
                         <TextView
                             android:id="@+id/text_coleccionista_telefono"
@@ -65,7 +65,7 @@
                             android:paddingTop="3dp"
                             android:layout_marginStart="70dp"
                             android:textSize="15sp"
-                            android:textColor="#808080"
+                            android:textColor="#000000"
                             android:text="@{coleccionista.telephone}"/>
 
                     </RelativeLayout>
@@ -80,7 +80,7 @@
                             android:layout_height="wrap_content"
                             android:paddingTop="3dp"
                             android:textSize="15sp"
-                            android:textColor="#808080"
+                            android:textColor="#000000"
                             android:text="Correo: "/>
                         <TextView
                             android:id="@+id/text_coleccionista_email"
@@ -89,7 +89,7 @@
                             android:paddingTop="3dp"
                             android:layout_marginStart="70dp"
                             android:textSize="15sp"
-                            android:textColor="#808080"
+                            android:textColor="#000000"
                             android:text="@{coleccionista.email}"/>
 
                     </RelativeLayout>
@@ -110,7 +110,8 @@
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:src="@drawable/fondo_coleccionista"/>
+                    android:src="@drawable/fondo_coleccionista"
+                    android:contentDescription='@{coleccionista.name}'/>
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>

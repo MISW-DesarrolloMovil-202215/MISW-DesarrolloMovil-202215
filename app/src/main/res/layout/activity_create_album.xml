@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/crearalbum"
+            android:contentDescription='Encabezado'>
+
+        </RelativeLayout>
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:text="Crear Album" />
+
+
+
+    <EditText
+        android:id="@+id/albumName_text_input"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:hint="Nombre"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_fondo_btn"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
+        android:inputType="text"
+        android:paddingHorizontal="16dp"/>
+
+
+
+    <EditText
+        android:id="@+id/albumCover_text_input"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:hint="URL de la Portada"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_fondo_btn"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
+        android:inputType="text"
+        android:paddingHorizontal="16dp"/>
+
+
+
+    <EditText
+        android:id="@+id/idEdtDate"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:hint="Fecha"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_fondo_btn"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:paddingHorizontal="16dp"/>
+
+
+
+    <EditText
+        android:id="@+id/albumDescripcion_text_input"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:textSize="15dp"
+        android:textColorHint="#000000"
+        android:hint="Descripción"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_fondo_btn"
+        android:textColor="#000000"
+        android:inputType="text"
+        android:paddingHorizontal="16dp"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/textAlbumGenre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textColorHint="#000000"
+        android:textStyle="bold"
+        android:hint="Género:" />
+
+    <Spinner
+        android:id="@+id/albumGenre_spinner"
+        android:layout_width="match_parent"
+        android:textSize="15dp"
+        android:labelFor="@+id/textAlbumGenre"
+        android:text="  Descripción"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/background_spinnerbtn"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
+        android:paddingHorizontal="5dp"
+        android:layout_height="49dp"/>
+
+    <TextView
+        android:id="@+id/textAlbumRecordLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:textColorHint="#000000"
+        android:textStyle="bold"
+        android:hint="Compañía Discográfica:" />
+
+    <Spinner
+        android:id="@+id/albumRecordLabel_spinner"
+        android:layout_width="match_parent"
+        android:textSize="15dp"
+        android:text="Descripción"
+        android:labelFor="@+id/textAlbumRecordLabel"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/background_spinnerbtn"
+        android:textColor="#000000"
+        android:paddingHorizontal="5dp"
+        android:layout_height="49dp" />
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_newAlbum"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@drawable/background_fondo"
+        android:text="Crear Album"
+        android:contentDescription='Finalizar y Crear Album'/>
+    </LinearLayout>
+</LinearLayout>

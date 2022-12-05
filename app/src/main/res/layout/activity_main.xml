@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:elevation="6dp"
         android:src="@drawable/logo"
+        android:contentDescription='Logo aplicación'
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/backgroundBlack"></ImageView>
 
@@ -80,6 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.923"
         app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription='Fondo aplicación'
         app:layout_constraintTop_toTopOf="parent" />
 <!--Menu-->
     <LinearLayout
@@ -111,7 +113,8 @@
                     android:layout_width="130dp"
                     android:layout_height="183dp"
                     android:layout_marginStart="3dp"
-                    android:src="@drawable/album"></ImageButton>
+                    android:src="@drawable/album"
+                    android:contentDescription='Enlace a los Albumes'></ImageButton>
 
                 <Button
                     android:id="@+id/albumes2"
@@ -120,19 +123,22 @@
                     android:text="Albumes"
                     android:textSize="10sp"
                     android:layout_marginTop="138dp"
-                    android:textColor="#ffffff"></Button>
+                    android:textColor="#ffffff"
+                    android:contentDescription='Redirije a los Albumes'></Button>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
                 <ImageButton
                     android:id="@+id/artistas"
                     android:layout_width="130dp"
                     android:layout_height="183dp"
-                    android:src="@drawable/artista"></ImageButton>
+                    android:src="@drawable/artista"
+                    android:contentDescription='Enlace a los Artistas'></ImageButton>
 
                 <Button
                     android:id="@+id/artistas2"
@@ -141,7 +147,8 @@
                     android:text="Artistas"
                     android:textSize="10sp"
                     android:layout_marginTop="138dp"
-                    android:textColor="#ffffff"></Button>
+                    android:textColor="#ffffff"
+                    android:contentDescription='Redirije a los Artistas'></Button>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_marginRight="10dp"
@@ -154,7 +161,8 @@
                     android:id="@+id/imgButtoncoleccionista"
                     android:layout_width="140dp"
                     android:layout_height="183dp"
-                    android:src="@drawable/coleccionista"></ImageButton>
+                    android:src="@drawable/coleccionista"
+                    android:contentDescription='Enlace a los Coleccionistas'></ImageButton>
                 <Button
                     android:id="@+id/btnColeccionistas"
                     android:layout_width="wrap_content"
@@ -162,7 +170,8 @@
                     android:text="Coleccionista"
                     android:textSize="10sp"
                     android:layout_marginTop="138dp"
-                    android:textColor="#ffffff"></Button>
+                    android:textColor="#ffffff"
+                    android:contentDescription='Redirije a los Coleccionistas'></Button>
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

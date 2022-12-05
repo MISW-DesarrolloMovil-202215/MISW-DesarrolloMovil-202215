@@ -6,6 +6,7 @@ import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -20,6 +21,7 @@ import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
    var glbJsonStrPremios:String=""
+    var glbJsonStrAlbum:String=""
     companion object{
         const val BASE_URL= "https://back-backvynils-grupo18.herokuapp.com/"
         var instance: NetworkServiceAdapter? = null
@@ -39,6 +41,10 @@ class NetworkServiceAdapter constructor(context: Context) {
         glbJsonStrPremios=response
         return response
     }
+    fun onCallback3(response: String): String {
+        glbJsonStrAlbum=response
+        return response
+    }
     suspend fun getAlbums() = suspendCoroutine<List<Album>>{ cont->
         requestQueue.add(getRequest("albums",
             Response.Listener<String> { response ->
@@ -49,6 +55,13 @@ class NetworkServiceAdapter constructor(context: Context) {
                 var item: JSONObject
                 for (i in 0 until resp.length()) {
                     item = resp.getJSONObject(i)
+                    val arrayTracks: JSONArray = item.getJSONArray("tracks")
+                    tracks=""
+                    for (j in 0 until arrayTracks.length()) {
+
+                        tracks += arrayTracks.getJSONObject(j).getString("name") + "    " + arrayTracks.getJSONObject(j).getString("duration") + "\n"
+
+                    }
                     list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate").split("T").toTypedArray()[0], genre = item.getString("genre"), description = item.getString("description"), tracks = tracks, comments = comments))
                 }
                 cont.resume(list)
@@ -93,12 +106,15 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Coleccionista>()
-                var tracks: String= ""
+                var favoritePerformers: String= ""
                 var comments: String= ""
+                var imagefavoritePerformers: String=""
+                var imagecollectorAlbums: String=""
+                var collectorAlbums: String=""
                 var item: JSONObject
                 for (i in 0 until resp.length()) {
                     item = resp.getJSONObject(i)
-                    list.add(i, Coleccionista(coleccionistaId = item.getInt("id"),name = item.getString("name"),telephone= item.getString("telephone"),email= item.getString("email")))
+                    list.add(i, Coleccionista(coleccionistaId = item.getInt("id"),name = item.getString("name"),telephone= item.getString("telephone"),email= item.getString("email"),comments=comments,imagefavoritePerformers=imagefavoritePerformers,collectorAlbums=collectorAlbums,favoritePerformers=favoritePerformers,imagecollectorAlbums=imagecollectorAlbums))
 
                 }
                 cont.resume(list)
@@ -106,6 +122,68 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.ErrorListener {
                 cont.resumeWithException(it)
             }))
+    }
+    suspend fun getColeccionista(coleccionistaId:Int)=suspendCoroutine<List<Coleccionista>>{cont->
+        getAllAlbums()
+        requestQueue.add(getRequest("collectors/$coleccionistaId",
+            Response.Listener<String> { response ->
+                val resp = JSONObject(response)
+                var favoritePerformers: String=""
+                var imagefavoritePerformers: String=""
+                var collectorAlbums: String=""
+                var imagecollectorAlbums: String=""
+                var comments: String=""
+                var collector: String=""
+                val list = mutableListOf<Coleccionista>()
+                val arrFavorite: JSONArray = resp.getJSONArray("favoritePerformers")
+                val arrComments: JSONArray = resp.getJSONArray("comments")
+                val arrCollectorAlbums: JSONArray = resp.getJSONArray("collectorAlbums")
+                for (i in 0 until arrFavorite.length()) {
+                    favoritePerformers += "NOMBRE: " +arrFavorite.getJSONObject(i).getString("name")+ "\n" + "\n" +  "DESCRIPCIÓN: " + arrFavorite.getJSONObject(i).getString("description")  + "\n"
+                    imagefavoritePerformers+=arrFavorite.getJSONObject(i).getString("image")
+                }
+                var id_album:String
+                var nombre_album:String
+                var imagen_album:String
+                val arrAlbum = JSONArray(glbJsonStrAlbum)
+                var _album:JSONObject
+                for (i in 0 until arrCollectorAlbums.length()) {
+                    id_album=arrCollectorAlbums.getJSONObject(i).getString("id")
+                    for (j in 0 until arrAlbum.length()) {
+                        _album=arrAlbum.getJSONObject(j)
+                        nombre_album=_album.getString("name")
+                        imagen_album=_album.getString("cover")
+                        if (arrAlbum.getJSONObject(j).getString("id") ==id_album)
+                        {
+                            collectorAlbums += "NOMBRE: " +nombre_album + "\n"+ "\n"+  "PRECIO: " +arrCollectorAlbums.getJSONObject(i).getString("price")+"\n"+"\n"+"ESTADO: " +arrCollectorAlbums.getJSONObject(i).getString("status")+"\n"
+                            imagecollectorAlbums +=imagen_album
+                        }
+                    }
+                    // prizes += arrPrizesMusico.getJSONObject(i).getString("name") + "\n"
+                }
+                for (i in 0 until arrComments.length()) {
+                    comments +="DESCRIPCIÓN: " +arrComments.getJSONObject(i).getString("description")+ "\n"  + "\n" + "CALIFICACIÓN: " + arrComments.getJSONObject(i).getString("rating") + "\n" + "\n"
+                }
+
+                list.add(0, Coleccionista(coleccionistaId = resp.getInt("id"),name = resp.getString("name"), telephone = resp.getString("telephone"), email = resp.getString("email"), imagefavoritePerformers = imagefavoritePerformers, comments = comments,favoritePerformers=favoritePerformers,collectorAlbums=collectorAlbums,imagecollectorAlbums=imagecollectorAlbums))
+                cont.resume(list)
+            },
+            Response.ErrorListener {
+                cont.resumeWithException(it)
+            }))
+    }
+    private fun getAllAlbums(){
+        // Instantiate the RequestQueue.
+        val url: String = "https://back-backvynils-grupo18.herokuapp.com/albums"
+        // Request a string response from the provided URL.
+        val stringReq = StringRequest(Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                var strResp = response.toString()
+                glbJsonStrAlbum=strResp
+            },
+            Response.ErrorListener {Log.d("API", "that didn't work") })
+        requestQueue.add(stringReq)
+
     }
 
     suspend fun getArtists()=suspendCoroutine<List<Artist>>{cont->
@@ -193,7 +271,61 @@ class NetworkServiceAdapter constructor(context: Context) {
             },
             Response.ErrorListener {Log.d("API", "that didn't work") })
         requestQueue.add(stringReq)
+    }
 
+    fun postNewAlbum(body: JSONObject){
+        requestQueue.add(postRequest("albums",
+            body,
+            Response.Listener<JSONObject> { response ->
+                var strResp = response.toString()
+                Log.d("API", strResp)
+            }, Response.ErrorListener {Log.d("API", "that didn't work")
+                Exception("Error")
+            }))
+    }
+
+
+   fun postNewTrack(body: JSONObject,idAlbum:String){
+        requestQueue.add(postRequest("albums/"+idAlbum+"/tracks",
+            body,
+            Response.Listener<JSONObject> { response ->
+                var strResp = response.toString()
+                Log.d("API", strResp)
+                return@Listener
+
+            }, Response.ErrorListener {Log.d("API", "that didn't work")
+                Exception("Error")
+            }))
+    }
+
+    fun get_AllAlbums():String{
+        getAllAlbums()
+        Log.d("glbJsonStrAlbum",glbJsonStrAlbum)
+        return glbJsonStrAlbum
+
+    }
+
+
+
+    suspend fun postTrackToAlbum(body: JSONObject,idAlbum:String)=suspendCoroutine<JSONObject>{cont->
+        requestQueue.add(postRequest("albums/"+idAlbum+"/tracks",
+            body,
+            Response.Listener<JSONObject> { response ->
+
+                // val resp = JSONArray(response)
+                //val list = mutableListOf<Artist>()
+                //var item: JSONObject
+                //for (i in 0 until resp.length()) {
+                //  item = resp.getJSONObject(i)
+                // list.add(i, Artist(artistId = item.getInt("id"),name = item.getString("name"), image = item.getString("image"), birthDate = item.getString("birthDate").split("T").toTypedArray()[0], description = item.getString("description"), albumes = "", prizes = ""))
+
+                //}
+                Log.d("APIPOSTTRAC",response.toString())
+                cont.resume(response)
+            },
+            Response.ErrorListener {
+                cont.resumeWithException(it)
+            }))
     }
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
