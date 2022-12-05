@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">VinilosApp_G18</string>
-    <string name="btn_crear_album">Crear albúm</string>
     <string-array name="genres_array">
         <item>Classical</item>
         <item>Folk</item>
@@ -14,5 +13,4 @@
         <item>Fania Records</item>
         <item>Sony Music</item>
     </string-array>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

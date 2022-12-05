@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#eeeeee"
     android:orientation="horizontal"
-    tools:context=".ui.ColeccionistaDetailFragment">
+    tools:context=".ui.ColeccionistaDetailFragment"
+    tools:ignore="Overdraw">
 
     <!-- TODO: Update blank fragment layout -->
     <ProgressBar

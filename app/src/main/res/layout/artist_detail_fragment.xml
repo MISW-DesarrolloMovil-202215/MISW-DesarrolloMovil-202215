@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#eeeeee"
     android:orientation="vertical"
-    tools:context=".ui.ArtistDetailFragment">
+    tools:context=".ui.ArtistDetailFragment"
+    tools:ignore="Overdraw">
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_marginTop="250dp"
